@@ -1,15 +1,42 @@
 {
-  "name": "",
-  "version": "",
-  "description": "",
-  "author": "",
-  "license": "",
+  "name": "hector",
+  "version": "0.0.1",
+  "description": "Server serving up some hot reviews",
+  "author": "hw",
+  "license": "UNLICENSED",
   "engines": {
     "node": ">=6.13.0"
   },
-  "scripts": {
+
+  "babel" : {
+    "presets" : [
+      "@babel/preset-env",
+      "@babel/preset-react"
+    ]
   },
+  "scripts": {
+    "test": "echo no-test-set",
+    "server-dev": "nodemon ./server/server.js",
+    "react-dev": "webpack -d --watch"
+  },
+
   "dependencies": {
+
+    "express":"4.16.4",
+    "body-parser": "1.18.3",
+
+    "webpack": "4.29.6",
+    "webpack-cli": "3.3.0",
+
+    "@babel/core" :"7.4.0",
+    "@babel/preset-env": "7.4.2",
+    "@babel/preset-react": "7.0.0",
+    "babel-loader": "8.0.5",
+
+    "mongodb": "3.2.2",
+    "mongoose": "5.4.20"
+
+
   },
   "devDependencies": {
     "eslint-config-hackreactor": "git://github.com/reactorcore/eslint-config-hackreactor"
