@@ -1,5 +1,4 @@
 var db = require('../database/index').modules;
-var Gen = require('../database/Mock/generator');
 express = require('express');
 bodyParser = require('body-parser');
 app = express();
@@ -14,13 +13,13 @@ app.use((req, res, next)=>{
 });
 
 // db.clearDatabase(); // --> DEBUG ONLY :)
-app.get('/review-features', (req, res)=>{
+app.get('/review-features', (req, res)=> {
   res.send({message: {msg: 'more-review-comming soon'}});
 });
 
 
 
-app.get('/shoe-testimonial', (req, res )=>{
+app.get('/shoe-testimonial', (req, res )=> {
   db.readCollection( (dbCollection)=>{
     console.log(dbCollection);
   });
