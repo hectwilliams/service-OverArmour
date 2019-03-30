@@ -39,13 +39,14 @@ var generateTable = function(callback) {
   for(var i=0; i<reviewsCount; i++) {
     docs.push( genTestimonials());
   }
-  db.modules.writeCollection(docs,tableName);
+  db.accessHelpers.writeCollection(docs,tableName);
 };
 
-var  run = function(count) {
+var run = function(count) {
   generateTable();
 };
 
-exports.modules = {
+exports.accessHelpers = {
   run
 };
+

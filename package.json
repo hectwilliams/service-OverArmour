@@ -43,7 +43,9 @@
 
     "request": "2.88.0",
 
-    "faker": "4.1.0"
+    "faker": "4.1.0",
+
+    "aws-sdk": "2.432.0"
 
   },
   "devDependencies": {
