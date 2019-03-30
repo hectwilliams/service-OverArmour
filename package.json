@@ -18,7 +18,8 @@
     "test": "echo no-test-set",
     "server-dev": "nodemon ./server/server.js",
     "react-dev": "webpack -d --watch",
-    "es-dev" : "eslint ./database"
+    "es-dev" : "eslint ./database",
+    "seed" : "node ./database/seedData.js"
   },
 
   "dependencies": {
@@ -42,7 +43,9 @@
 
     "request": "2.88.0",
 
-    "faker": "4.1.0"
+    "faker": "4.1.0",
+
+    "file-system": "2.2.2"
   },
   "devDependencies": {
     "eslint-config-hackreactor": "git://github.com/reactorcore/eslint-config-hackreactor"

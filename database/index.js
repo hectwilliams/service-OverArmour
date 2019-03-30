@@ -1,37 +1,49 @@
 const MongoClient = require('mongodb').MongoClient;
-// const assert = require('assert');
 
 // Connection URL
 const url = 'mongodb://localhost:27017';
 
-// Database Name
+// DB INFO
 const dbName = 'reviews';
-const optionsTableName = 'Option';
-const testimonialTableName = 'Testimonial';
-
-// Create a new MongoClient
+const tbName = 'pid1000';
+// CLIENT
 const client = new MongoClient(url);
 
+ var clearDatabase = function() {
+  MongoClient.connect(url , (err,db)=>{
+    db.db('reviews').collection('pid1000').remove();
+  } );
+}
 
-var readFeatureList = ()=>{
+
+var readCollection = (callback)=>{
   client.connect(function(err) {
-
     if (err) {
       throw 'err connecting';
     }
     console.log('Connected successfully to server');
+     client.db(dbName).collection(tbName).find().toArray((err,dbDocs)=>{
+      callback(dbDocs);
+    })
+  });
+};
 
+var writeCollection = (obj,collectionName)=>{
+  client.connect(function(err) {
+    if (err) {
+      throw 'err connecting';
+    }
     var db = client.db(dbName);
-    db.collection(optionsTableName).find({}).toArray((err, docs)=>{
-      console.log(docs);
-      console.log('features list read successfully');
+    var collection =  db.collection(collectionName);
+    collection.insertMany( obj,(err, promise)=>{
+      console.log(promise);
     });
-
-    client.close();
   });
 };
 
 
 exports.modules = {
-  readFeatureList
+  readCollection,
+  writeCollection,
+  clearDatabase
 };
