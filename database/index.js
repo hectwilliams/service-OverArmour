@@ -1,19 +1,14 @@
 const MongoClient = require('mongodb').MongoClient;
-
-// Connection URL
-const url = 'mongodb://localhost:27017';
-
-// DB INFO
+const uri = 'mongodb://localhost:27017';
 const dbName = 'reviews';
 const tbName = 'pid1000';
-// CLIENT
-const client = new MongoClient(url);
+const client = new MongoClient(uri);
 
  var clearDatabase = function() {
-  MongoClient.connect(url , (err,db)=>{
-    db.db('reviews').collection('pid1000').remove();
+  client.connect((err,db)=>{
+    db.db('reviews').collection('pid1000').deleteOne();
   } );
-}
+};
 
 
 var readCollection = (callback)=>{
@@ -42,8 +37,8 @@ var writeCollection = (obj,collectionName)=>{
 };
 
 
-exports.modules = {
+exports.accessHelpers = {
   readCollection,
-  writeCollection,
-  clearDatabase
+   writeCollection,
+   clearDatabase
 };

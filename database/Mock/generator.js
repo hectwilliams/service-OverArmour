@@ -2,7 +2,7 @@ var faker = require('faker')
 var db = require('../../database/index');
 faker.seed(100);
 
-var genPID = function(){
+var genPID = function(){ //quiet for now
   return   `pid_${ faker.random.number({min:1,max:1000}) }`;
 }
 
@@ -28,7 +28,6 @@ var genTestimonials = function(){
   obj.response = faker.lorem.sentences(4);
   obj.user = faker.name.firstName({male:22});
   obj.date = faker.date.recent();
-
   return obj;
 }
 
@@ -40,12 +39,14 @@ var generateTable = function(callback) {
   for(var i=0; i<reviewsCount; i++) {
     docs.push( genTestimonials());
   }
-  db.modules.writeCollection(docs,tableName);
+  db.accessHelpers.writeCollection(docs,tableName);
 };
-var  run = function(count) {
+
+var run = function(count) {
   generateTable();
 };
 
-exports.modules = {
+exports.accessHelpers = {
   run
 };
+

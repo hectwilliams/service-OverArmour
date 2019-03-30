@@ -45,7 +45,8 @@
 
     "faker": "4.1.0",
 
-    "file-system": "2.2.2"
+    "aws-sdk": "2.432.0"
+
   },
   "devDependencies": {
     "eslint-config-hackreactor": "git://github.com/reactorcore/eslint-config-hackreactor"
