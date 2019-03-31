@@ -6,7 +6,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <div className='title'> <Title/> </div>
+        <img className='images' src={this.props.test}></img>
       </div>
     )};
 }
