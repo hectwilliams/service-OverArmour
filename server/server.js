@@ -1,8 +1,10 @@
 var db = require('../database/index');
 var s3 = require('../amazon/index');
 var express = require('express');
+var amazon = require('../amazon/index');
 var bodyParser = require('body-parser');
 var app = express();
+
 const uri = '/en-us/ua-curry-6-basketball-shoes/pid3020612-405';
 
 app.use(bodyParser.json());
@@ -31,6 +33,18 @@ app.get( `${uri}/aws`, (req, res )=> {
     res.send({message: data});
   });
 });
+
+app.get(`${uri}/init`, (req, res)=> {
+  db.accessHelpers.readCollection( (dbCollection)=>{
+    amazon.accessHelpers.fetchStatic((data) => {
+      res.status(200);
+      dbCollection.unshift(data);
+      res.send(dbCollection);
+    });
+  });
+});
+
+
 app.listen(3005, ()=>{
   console.log('listening on port 3005');
 });

@@ -8,6 +8,8 @@ var genPID = function() { //quiet for now
 
 var genTestimonials = function() {
   var obj = {};
+
+
   obj.gender = 'male';
   obj.height = '6\'8\"';
   obj.athleteType = 'Avid';
@@ -20,32 +22,35 @@ var genTestimonials = function() {
   obj.comfortRating = faker.random.number({min: 0, max: 7});
   obj.sizeRating = faker.random.number({min: 0, max: 7});
   obj.stars = faker.random.number({min: 0, max: 5});
-  obj.subject = faker.lorem.sentence(10, 20);
+  obj.subject = faker.lorem.words({num:2})
   obj.review = faker.lorem.sentences(4);
-  obj.picture = faker.image.sports(100, 100);
+  obj.picture = faker.image.sports(1, 100);
   obj.likes = [faker.random.number(100), faker.random.number(100)];
   obj.response = faker.lorem.sentences(4);
   obj.user = faker.name.firstName({male: 22});
   obj.date = faker.date.recent();
+  obj.logoA = faker.image.abstract();
+  obj.logoB = faker.image.nature();
+  obj.dislikes = [faker.random.number(100), faker.random.number(100)];
+
+  obj.responseDate = faker.date.past()
   return obj;
 };
 
 var generateTable = function(callback) {
   const reviewsCount = 100;
-  var tableName = 'pid1000'; //product#
+  var tableName = 'pid3020612-405'; //product#
   var docs = [];
-
   for (var i = 0; i < reviewsCount; i++) {
     docs.push( genTestimonials());
   }
   db.accessHelpers.writeCollection(docs, tableName);
 };
 
-var run = function(count) {
+var run = function() {
   generateTable();
 };
 
 exports.accessHelpers = {
   run
 };
-

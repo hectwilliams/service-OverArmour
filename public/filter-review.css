@@ -1,0 +1,57 @@
+.filter-selection {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-content: space-around;
+  border-bottom-style: dotted;
+  border-color : silver;
+}
+
+.segment {
+  height: 100%;
+  width: 100%;
+}
+
+.write-review {
+  height:30px;
+  background-color: red;
+  color:white;
+  border-radius: 5px 5px 5px 5px;
+  font-weight: bold
+}
+
+.filter-selection-option-list {
+  display: flex ;
+  flex-direction: row;
+  height: 20%;
+  font-size: xx-small;
+}
+
+.filter-selection-option {
+  display: block;
+  height: 10%;
+  width:50%;
+  border-color:yellow;
+}
+.filter-selection-option-font {
+ font-size: xx-small;
+}
+
+.shift {
+  margin-left:70%;
+  font-size: xx-small;
+}
+
+.sort-button {
+border-radius: 5px;
+font-size: xx-small;
+}
+
+.small {
+  font-size: 9px;
+}
+
+.medium {
+  font-size: x-small;
+
+}
