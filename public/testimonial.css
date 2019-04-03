@@ -1,0 +1,101 @@
+.testimonial {
+  display: flex;
+  flex-direction: row;
+  border-bottom-style: dotted;
+  border-color : silver;
+}
+
+.testimonial-user-info {
+  display: inline-block;
+  border-color:powderblue;
+  width :50%;
+
+}
+
+.testimonial-user-data  {
+  display: inline-block;
+  border-color:yellow;
+  width :70%;
+  margin-left:  15%
+}
+
+.testimonial-user-who {
+  display:flex;
+  flex-direction: column;
+  width :15%;
+
+}
+
+.list {
+  list-style-type: none;
+  font-size: xx-small;
+}
+
+.testimonial-user-data-sel {
+  display:flex;
+  flex-direction: column;
+}
+.testimonial-user-stats {
+  display: flex;
+  height: 20;
+  justify-content: flex-end;
+  margin-left: 20%;
+}
+
+.testimonial-message {
+  font-size: x-small;
+}
+
+.testimonial-pic {
+    display: inline-block;
+   width:40px;
+   height:0px;
+
+}
+.likes-entry {
+  display: inline-block;
+  width:20px;
+  height:20px;
+  font-size: 4px;
+  text-align:left;
+  margin-right :0%;
+
+
+}
+
+.testimonial-response-fixed{
+  display: flex;
+  flex-direction: row;
+  font-size: x-small;
+  align-items:center;
+
+}
+.testimonial-response-subject {
+  display: flex;
+  flex-direction: column;
+  font-size: x-small;
+  justify-content: space-around;
+
+}
+.symbol {
+  display: inline-block;
+  width:20px;
+  height:20px;
+}
+
+.likes {
+  background-image: url('./thumpsup.jpg');
+  background-size: contain;
+}
+.dislikes {
+  background-image: url('./thumpsup.jpg');
+  background-size: contain;
+  transform: rotate(180deg);
+
+}
+.small {
+  font-size: xx-small;
+}
+.medium {
+  font-size: small;
+}

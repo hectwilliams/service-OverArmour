@@ -1,21 +1,32 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './Components/app';
+import App from  './Components/app'
 import $ from 'jquery';
 
-ReactDOM.render(<App/>,document.getElementById('root'));
-const url = 'http://localhost:3005/en-us/ua-curry-6-basketball-shoes/pid3020612-405/aws';
+var id = 'pid3020612-405/';
+const host= 'http://localhost:3005/';
+const path = 'en-us/ua-curry-6-basketball-shoes/';
+const endpoint = 'init/'
 
+var url = host + path +id +endpoint;
 
 $(document).ready(()=> {
+  iniitializePage ();
+});
+
+var iniitializePage = function() {
+  console.log(url)
   $.ajax({
     method: "get",
     url: url,
     type:"json",
-    success: (data)=>{
+    success: (data)=> {
       console.log(data)
-      var uri = 'https://s3-us-west-1.amazonaws.com/fec-underamour-media/'+data.message[1].Key;
-      ReactDOM.render(<App test={uri} />,document.getElementById('root'));
+      ReactDOM.render(<App dbStatic={data[0]} dbData={data.slice(1)}/> , document.getElementById('root'));
+    },
+    error: (data)=> {
+      console.log('error');
     }
   });
-});
+};
+
