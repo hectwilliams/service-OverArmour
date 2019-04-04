@@ -1,37 +1,23 @@
 
-import React from 'react';
-import  enzyme from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
-enzyme.configure({ adapter: new Adapter() });
-
-import {shallow, mount, render} from 'enzyme';
 
 
-import Stars from '../../client/Components/shared/stars';
-describe('react index.jsx', ()=> {
-  test('this is a test', ()=> {
-    expect(shallow(<Stars/>).is('.medium')).toBe(true);
-  })
-});
-
-
-
-describe ('amazon code', ()=> {
+describe ('s3 tests-->', ()=> {
 
   var awsIndex = require('../../amazon/index');
   var awsParse = require('../../amazon/parser');
-  var s3 =  require('../../amazon/index')
-  const mockCallback = jest.fn(x=>x );
 
-  test( 'should invoke reads to s3', ()=> {
-    var info = awsIndex.accessHelpers.fetchStatic(mockCallback);
-    expect(info).toBe(undefined);
-    var info = awsIndex.accessHelpers.test(mockCallback);
-    expect(info).toBe(undefined);
-  })
-
-
-
+  test( 'should invoke reads to s3', done => {
+    awsIndex.accessHelpers.fetchStatic((msg)=>{
+      expect(msg.constructor).toBe(Array);
+      done();
+    });
+  });
+  test( 'should invoke reads to s3', done => {
+    awsIndex.accessHelpers.test((msg)=>{
+      expect(msg.constructor).toBe(Array);
+      done();
+    });
+  });
 
   var obj=  { IsTruncated: false,
     Contents:

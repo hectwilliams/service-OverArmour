@@ -31,7 +31,6 @@ var genTestimonials = function() {
   obj.logoA = faker.image.abstract();
   obj.logoB = faker.image.nature();
   obj.dislikes = [faker.random.number(100), faker.random.number(100)];
-
   obj.responseDate = faker.date.past()
   return obj;
 };
@@ -48,6 +47,7 @@ var generateTable = function(callback) {
 
 var run = function() {
   generateTable();
+  console.log('databased seeded!');
 };
 
 exports.accessHelpers = {
