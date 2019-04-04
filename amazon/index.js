@@ -6,7 +6,6 @@ const parse = require('./parser');
 
 
 var test = (callback)=> {
-  list = [];
   var param = {
     Bucket: bucketName,
     StartAfter: 'media/images',
@@ -14,14 +13,12 @@ var test = (callback)=> {
   };
 
   s3.listObjectsV2(param, (err, data)=> {
-    list = parse.fetchImages(data);
-    callback(list);
+    callback(parse.fetchImages(data));
   });
 };
 
 
 var fetchStatic = (callback)=> {
-  list = [];
   var param = {
     Bucket: bucketName,
     StartAfter: 'media/static',
@@ -29,8 +26,7 @@ var fetchStatic = (callback)=> {
   };
 
   s3.listObjectsV2(param, (err, data)=> {
-    list = parse.fetchImages(data);
-    callback(list);
+    callback(parse.fetchImages(data));
   });
 };
 
