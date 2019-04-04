@@ -36,7 +36,7 @@ render(){
           <small> {this.props.info.subject}  </small>
         </div>
 
-        <div className='testimonial-message'>  {this.props.info.review}</div>
+        <div className='testimonial-message'>  {this.props.info.review} </div>
 
         <div>
           <span className='testimonial-pic'>
@@ -51,7 +51,7 @@ render(){
         <div className='testimonial-message'>  Was this helpful?
           <span className='likes-entry'>
           <button  onClick={this.clickHanlder.bind(this)}  className=' symbol likes'></button>
-          </span><small>{this.state.likes}</small>
+          </span> <small>{this.state.likes} </small>
 
           <span className='likes-entry'>
             <button  onClick={this.clickHanlder.bind(this)} className=' symbol dislikes '></button>
@@ -68,7 +68,7 @@ render(){
       <div className='testimonial-response-subject '>
           <span> <strong>  UAExpert , UACustomerService </strong></span>
           <span className='small'> {this.props.info.responseDate.slice(0,10)} </span>
-          <span className='testimonial-message'>  {this.props.info.response}</span>
+          <span className='testimonial-message'>  {this.props.info.response} </span>
       </div>
 
 

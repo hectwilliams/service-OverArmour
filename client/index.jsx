@@ -23,6 +23,8 @@ var iniitializePage = function() {
     success: (data)=> {
       console.log(data)
       ReactDOM.render(<App dbStatic={data[0]} dbData={data.slice(1)}/> , document.getElementById('root'));
+      // ReactDOM.render(<App /> , document.getElementById('root'));
+
     },
     error: (data)=> {
       console.log('error');

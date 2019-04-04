@@ -9,11 +9,10 @@ var genPID = function() { //quiet for now
 var genTestimonials = function() {
   var obj = {};
 
+  obj.height =  `${faker.random.number({min: 5, max:7})} '${faker.random.number({min: 0, max:11})}"`
+  obj.gender = faker.random.arrayElement(['Avid', 'Casual' ,'Professional']);
+  obj.sportsInterest = faker.random.arrayElement(['Basketball', 'Soccer', 'Basball, Softball', 'Field Hockey', 'Football', 'Golf', 'Lacrosse', 'Rugby', 'Volleyball']);
 
-  obj.gender = 'male';
-  obj.height = '6\'8\"';
-  obj.athleteType = 'Avid';
-  obj.sportsInterest = 'Basketball';
   obj.gender = faker.random.arrayElement(['male', 'female']);
   obj.user = faker.name.firstName({male: 22});
   obj.date = faker.date.recent();
