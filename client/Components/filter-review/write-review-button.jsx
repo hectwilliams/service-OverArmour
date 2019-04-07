@@ -1,27 +1,40 @@
 import React from 'react';
-
+import Modal from './modal-gen';
 
 class ReviewButton extends React.Component  {
   constructor(props) {
+    super(props);
+
     this.state = {
-      modelEnable: false
+      modalEnabled : false,
     }
   }
 
   clickMe(e) {
-    console.log(e.target.name);
-    this.state.modelEnable = true;
+    this.setState({
+      modalEnabled: !this.state.modalEnabled,
+    })
   }
-  removeModel() {
-    this.state.modelEnable = false;
 
+  releaseModal() {
+    this.setState({
+      modalEnabled: false,
+    })
   }
+
   render(){
-    return(
-    <div className="segment">
-        <button  done ={this.modelEnable.bind(this)}   clickMe = {this.clickMe.bind(this)}  className="write-review">  WRITE A REVIEW > </button>
+    return (
+      <div className="segment">
+        <button onClick= {this.clickMe.bind(this)} className="write-review">  WRITE A REVIEW > </button>
+        { !this.state.modalEnabled ? '' :
+         <Modal
+          releaseModal = {this.releaseModal.bind(this)}
+          addTestimonial = {this.props.addTestimonial.bind(this)}
+          />
+        }
       </div>
     )
+
   }
 }
 

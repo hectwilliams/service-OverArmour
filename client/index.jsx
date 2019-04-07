@@ -15,16 +15,12 @@ $(document).ready(()=> {
 });
 
 var iniitializePage = function() {
-  console.log(url)
   $.ajax({
     method: "get",
     url: url,
     type:"json",
     success: (data)=> {
-      console.log(data)
-      ReactDOM.render(<App dbStatic={data[0]} dbData={data.slice(1)}/> , document.getElementById('root'));
-      // ReactDOM.render(<App /> , document.getElementById('root'));
-
+      ReactDOM.render(<App path={path} host={host} pid={id} dbStatic={data[0]} dbData={data.slice(1)}/> , document.getElementById('root'));
     },
     error: (data)=> {
       console.log('error');

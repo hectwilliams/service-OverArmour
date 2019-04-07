@@ -44,8 +44,12 @@
 
 .testimonial-message {
   font-size: x-small;
+  padding-top:1%;
 }
-
+.testimonial-background  {
+  background-color: rgb(254, 254, 254);
+  border-width: thin
+}
 .testimonial-pic {
     display: inline-block;
    width:40px;
@@ -75,6 +79,8 @@
   flex-direction: column;
   font-size: x-small;
   justify-content: space-around;
+  border-style: double;
+  border-color:rgb(215, 209, 202)
 
 }
 .symbol {

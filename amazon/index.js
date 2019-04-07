@@ -13,7 +13,11 @@ var test = (callback)=> {
   };
 
   s3.listObjectsV2(param, (err, data)=> {
-    callback(parse.fetchImages(data));
+      if (err) {
+      callback(true);
+    } else {
+      callback(null, parse.fetchImages(data));
+    }
   });
 };
 
@@ -26,7 +30,11 @@ var fetchStatic = (callback)=> {
   };
 
   s3.listObjectsV2(param, (err, data)=> {
-    callback(parse.fetchImages(data));
+    if (err) {
+      callback(true);
+    } else {
+      callback(null, parse.fetchImages(data));
+    }
   });
 };
 

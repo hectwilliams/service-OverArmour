@@ -2,7 +2,13 @@ const MongoClient = require('mongodb').MongoClient;
 const uri = 'mongodb://localhost:27017';
 const dbName = 'reviews';
 var tableName = 'pid3020612-405'; //product#
-const client = new MongoClient(uri, { useNewUrlParser: true });
+
+var options = {
+   useNewUrlParser: true,
+  //  serializeFunctions: true,
+   recordQueryStats: true
+   };
+var client = new MongoClient(uri,options);
 
 var clearDatabase = function(callback) {
   client.connect((err, db)=> {
@@ -13,33 +19,57 @@ var clearDatabase = function(callback) {
       console.log('collection cleared');
     });
   });
+  // client.close();
 };
 
 var readCollection = (callback)=> {
-  client.connect(function(err) {
+  client.connect((err,db)=> {
     console.log('Connected successfully to server');
-    client.db(dbName).collection(tableName).find().toArray((err, dbDocs)=> {
-      callback(dbDocs);
+    db.db(dbName).collection(tableName).find().toArray((err, dbDocs)=> {
+      callback(err, dbDocs,client);
+    });
+  });
+  // client.close();
+};
+
+var writeCollection = (obj, collectionName ,callback)=> {
+  client.connect(function(err, db) {
+    var db = db.db(dbName);
+    var collection = db.collection(tableName);
+    collection.insertMany( obj, (err, promise)=> {
+      if (callback) {
+        callback(err, promise, client);
+        // client.close();
+      }
+    });
+  });
+};
+var writeOnceToCollection = (obj, collectionName ,callback)=> {
+  client.connect(function(err,db) {
+    db.db(dbName).collection(collectionName).insertOne( obj, (err, promise)=> {
+      if( err ) {
+        console.log('write rror')
+        console.log(err)
+      } else {
+        if (callback) {
+          callback(err,promise,client);
+        }
+      }
     });
   });
 };
 
-var writeCollection = (obj, collectionName ,callback)=> {
-  client.connect(function(err) {
-    var db = client.db(dbName);
-    var collection = db.collection(tableName);
-    collection.insertMany( obj, (err, promise)=> {
-      if (callback) {
-        callback(promise);
-      }
-    });
+var sortCollection = (list)=> {
+  return list.sort((a,b)=> {
+   return b.timestamp - a.timestamp;
   });
-  client.close();
 };
 
 
 exports.accessHelpers = {
   readCollection,
   writeCollection,
-  clearDatabase
+  clearDatabase,
+  writeOnceToCollection,
+  sortCollection
 };
