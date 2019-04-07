@@ -54,3 +54,66 @@ font-size: xx-small;
 .medium {
   font-size: x-small;
 }
+.modal {
+  display: flex;
+  flex-direction: column;
+  margin : 0 auto;
+  position: absolute;
+  margin-top:5%;
+  z-index: 1;
+  left:0;
+  top:0;
+  right:0;
+  width :50%;
+  /* height: 50%; */
+  overflow:auto;
+  background-color: rgba(175, 161, 161, 1);
+  border-color: black;
+  border-width: thin;
+  border-style: dotted;
+  animation: showModal;
+  animation-duration: .5s;
+}
+.modal-className {
+  display:block;
+  height: 50px;
+  background-color: rgb(135, 2, 9);
+  font-size: medium;
+  color:white;
+  padding: top 40%;
+  border-style: ridge;
+  text-align: center;
+}
+
+@keyframes showModal {
+  from {top:-300; opacity: 0; margin-top:0% }
+  to {top:0; opacity:1 ; margin-top:5%}
+}
+
+.terminate-modal {
+  animation: clearModal;
+  animation-duration: 3s;
+  border-style: groove;
+  border-color: blueviolet
+}
+
+@keyframes clearModal {
+  from {top:0; opacity: 1; margin-top:5% }
+  to {top:-300; opacity:0 ; margin-top:100%}
+}
+
+.submit-review-button {
+  background-color: rgb(4, 250, 16);
+  color:rgb(5, 5, 5);
+
+}
+
+.release-review-button {
+  background-color: rgb(250, 4, 238);
+  color:rgb(5, 5, 5);
+}
+.user-review-message-block {
+  padding-top: 20px;
+  width: 400px;
+  height: 200px;
+}

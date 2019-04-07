@@ -8,12 +8,20 @@ class FilterReviewEntry extends React.Component {
   constructor(props) {
     super(props);
   }
-  render() {return(
+
+
+  render() {
+    return(
     <div className="filter-selection">
-      <ReviewButton/>
+      <ReviewButton
+        addTestimonial = {this.props.addTestimonial.bind(this)}
+
+      />
       <FilterOption/>
       <SortSelection/>
     </div>
   )}
 }
 export default FilterReviewEntry;
+
+
