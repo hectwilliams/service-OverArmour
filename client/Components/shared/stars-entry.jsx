@@ -6,9 +6,6 @@ class  StarsEntry extends React.Component {
     super(props);
     this.state = {
       stars: this.props.stars,
-      cache:this.props.stars,
-      subject : this.props.subject,
-      set : false
     }
   }
 
@@ -17,17 +14,18 @@ class  StarsEntry extends React.Component {
     var x = e.target.getAttribute('id');
     this.setState({
       stars: x,
-      set: true
     });
     this.props.fetch(x);
   }
+
+
 
   reset (x) {
     this.setState({
       stars: 0,
       cache: 'null',
-      set : false
     });
+    this.props.fetch(0);
     return true;
   }
 
@@ -40,9 +38,10 @@ class  StarsEntry extends React.Component {
         subject = {this.props.subject}
         cache = {this.state.stars}
         reset = {this.reset.bind(this)}
-        set = {this.state.set}
+        release = {this.props.release} //release from from :)
       />
     </div>
+
     )
   }
 }

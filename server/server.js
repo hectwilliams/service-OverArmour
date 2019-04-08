@@ -50,7 +50,6 @@ app.get(`${uri}/init`, (req, res)=> {
           dbCollection.unshift(data);
 
           dbCollection.unshift( db.accessHelpers.avgStatsCollection(dbCollection));
-          console.log(dbCollection.slice(0,3))
           res.send(dbCollection);
         }else {
           console.log('errr')

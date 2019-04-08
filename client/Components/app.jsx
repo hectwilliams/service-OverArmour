@@ -10,14 +10,9 @@ class App extends React.Component {
     super(props);
     this.state = {
       dbData: this.props.dbData,
-      rating: ''
+      rating: '',
+      release: false
     }
-  }
-
-  componentDidMount() {
-    this.setState({
-      dbData: this.props.dbData
-    });
   }
 
   addTestimonial (obj) {
@@ -26,7 +21,8 @@ class App extends React.Component {
       } else {
           this.setState({
       dbData: [obj].concat(this.state.dbData),
-      rating: obj.stars
+      rating: obj.stars,
+      release: true
     });
       }
     });
@@ -46,7 +42,7 @@ class App extends React.Component {
          <TestimonialEntry
           dbData =  {this.state.dbData}
           dbStatic = {this.props.dbStatic}
-          rating = {this.state.rating}
+          release = {this.state.release}
 
          />
        </div>

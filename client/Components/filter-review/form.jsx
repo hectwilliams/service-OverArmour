@@ -13,7 +13,7 @@ class Form extends React.Component {
     };
   }
 
-  changeHanlder (e) {
+  changedTextHandler (e) {
     this.setState({
       text: e.target.value,
     });
@@ -63,7 +63,7 @@ class Form extends React.Component {
     messenger.comfortRating = this.state.starComfort;
     messenger.performanceRating = this.state.starPerf
     messenger.sizeRating = this.state.starSize;
-    messenger.stars = this.state.starProduct;
+    messenger.stars = this.state.starProduct==0? 0 :this.state.starProduct ;
     console.log(messenger)
     this.props.addTestimonial(messenger)
     this.props.releaseModal();
@@ -130,7 +130,7 @@ class Form extends React.Component {
       <input className='subject-box' type='text' name='subject'  mmin='0' max='100'></input>
       <br></br>
 
-      <textarea onChange={this.changeHanlder.bind(this)}  name='review' className='user-review-message-block' value = {this.state.text}> </textarea> <br></br>
+      <textarea onChange={this.changedTextHandler.bind(this)}  name='review' className='user-review-message-block' value = {this.state.text}> </textarea> <br></br>
 
       <input onClick={this.submitHandler.bind(this)} className='submit-review-button' type={'submit'} value={'Post'}  ></input>
       <input onClick={this.props.releaseModal} className='release-review-button' type={'submit'} value={'Cancel'}  ></input>
