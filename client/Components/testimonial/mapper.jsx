@@ -6,7 +6,8 @@ var Mapper = (props) => (
   <div className="testimonial">
     <UserInfo info = {props.dbData} />
     <UserData static = {props.dbStatic} info = {props.dbData}
-        rating = {props.rating}
+                 release = {props.release}
+
     />
   </div>
 );

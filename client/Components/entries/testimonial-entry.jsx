@@ -14,7 +14,8 @@ class TestimonialEntry extends React.Component {
     <div>
     { this.props.dbData ?this.props.dbData.map( (x,i) =>(
         <Mapper  key={i} dbStatic = {this.props.dbStatic}  dbData = {x}
-        rating = {this.props.rating}
+        release = {this.props.release}
+
         />
     )) : ''}
     </div>

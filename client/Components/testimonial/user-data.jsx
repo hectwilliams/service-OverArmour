@@ -1,8 +1,8 @@
 import React from 'react';
-import ReviewSummary from '../shared/review-summary'
+import ReviewSummary from '../shared/review-summary';
 import StarsEntry from '../shared/stars-entry';
 import DisLikes from  './dislikes';
-import Likes from  './likes'
+import Likes from  './likes';
 
 class UserData extends React.Component {
 constructor(props){
@@ -28,6 +28,7 @@ render(){
           <StarsEntry
             stars = {this.props.info.stars}
             subject = {this.props.info.subject}
+            release = {this.props.release}
             />
         </div>
 
