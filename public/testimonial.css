@@ -105,3 +105,8 @@
 .medium {
   font-size: small;
 }
+
+.disable-dom {
+  pointer-events: none;
+
+}
