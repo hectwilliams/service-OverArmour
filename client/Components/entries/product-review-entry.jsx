@@ -10,10 +10,19 @@ class ProductReviewSummaryEntry extends React.Component {
   render() {return(
     <div className="review-summary-container">
     <div className='ident'></div>
+      <AvgRating
+        stars = {this.props.avgStats.stars>5 || this.props.avgStats.stars<0?0: this.props.avgStats.stars }
+      />
+      <RatingBreakdown
+      starBreakdown = {this.props.avgStats.histoStars}
 
-      <AvgRating/>
-      <RatingBreakdown/>
-      <ReviewSummary/>
+      />
+
+      <ReviewSummary
+            comfortRate = { Math.floor (this.props.avgStats.size)}
+            performRate =  {Math.floor( this.props.avgStats.performance) }
+            sizeRate =  { Math.floor(this.props.avgStats.comfort)}
+            />
     </div>
 
   )}

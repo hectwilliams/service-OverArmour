@@ -20,12 +20,7 @@ class App extends React.Component {
     });
   }
 
-  componentDidUpdate() {
-
-  }
   addTestimonial (obj) {
-
-
     addReviewToDatabase(obj, this.props.pid, this.props.host, this.props.path, (err)=>{
       if(err) {
       } else {
@@ -37,18 +32,16 @@ class App extends React.Component {
     });
   }
 
-
-
-
   render() {
-    console.log(this.state.dbData)
     return (
       <div className="app">
 
-        <ProductReviewSummaryEntry/>
-          <FilterReviewEntry
-            addTestimonial = {this.addTestimonial.bind(this)}
-          />
+        <ProductReviewSummaryEntry
+          avgStats = {this.props.avgStats}
+        />
+        <FilterReviewEntry
+          addTestimonial = {this.addTestimonial.bind(this)}
+        />
 
          <TestimonialEntry
           dbData =  {this.state.dbData}
@@ -71,11 +64,10 @@ var addReviewToDatabase = function(data , pid,  hostname, path, callback ) {
     type: 'json',
     data: data,
     success: ()=> {
-      console.log()
-      callback(null, true)
+      callback(null)
     },
     error: (err)=> {
-      console.log(err)
+      console.log('duplicate insertion')
       callback(true)
     },
   });

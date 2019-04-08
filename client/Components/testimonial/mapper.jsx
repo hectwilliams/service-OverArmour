@@ -7,7 +7,6 @@ var Mapper = (props) => (
     <UserInfo info = {props.dbData} />
     <UserData static = {props.dbStatic} info = {props.dbData}
         rating = {props.rating}
-
     />
   </div>
 );

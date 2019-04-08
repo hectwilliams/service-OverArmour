@@ -134,31 +134,23 @@ class Form extends React.Component {
 
       <input onClick={this.submitHandler.bind(this)} className='submit-review-button' type={'submit'} value={'Post'}  ></input>
       <input onClick={this.props.releaseModal} className='release-review-button' type={'submit'} value={'Cancel'}  ></input>
-
-
       <br></br>
-
     </form>
-
     )
   }
-
 }
 
 
 export default Form;
-
-
 /* Prototypal Class  --> REVIEW*/
-
 var reviewer = function() {
   this.gender = 'null';
   this.user = 'null';
   this.date = getDate();
-  this.sizePurchased= 'null';
+  this.sizePurchased = 'null';
   this.performanceRating = 'null';
   this.comfortRating = 'null';
-  this.stars = 'null';
+  this.stars = 0;
   this.dislikes = 0;
   this.likes = 0;
   this.response = '';
@@ -172,17 +164,14 @@ var reviewer = function() {
   this.logoA = 'null';
   this.logoB = 'null';
   this.timestamp = Date.now();
-
 };
 reviewer.prototype.loadPicture = function(){}
 
 
 
 var getDate = () => {
-
   var sizeCheck = (x) => {
-
-    if((x).toString()!=2) {return '0'+ x }
+    if((x).toString()!=2) { return '0'+ x }
     return x;
   }
   var today = (new Date());
