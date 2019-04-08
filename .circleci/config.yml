@@ -12,6 +12,7 @@ jobs:
 
       steps:
         - checkout
+        - run: echo "running test"
 
       # Download and cache dependencies
       - restore_cache:
