@@ -28,18 +28,14 @@ jobs:
             # fallback to using the latest cache if no exact match is found
             - v1-dependencies-
 
-      - run:
-        name: install-npm-hw
-        command: npm install
+      - run: npm install
 
       - save_cache:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
 
-      - run:
-        name: test
-        command: npm linter
+      - run: npm linter
 
 
 
