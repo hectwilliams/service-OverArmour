@@ -28,3 +28,4 @@ dist/
 hidden_misc
 public/bundle.js
 /server/config.js
+# .circleci/config.yml
