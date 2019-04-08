@@ -44,6 +44,6 @@ jobs:
   # - run: npm linter
   workflows:
     version: 2
-    linter:   #//job NAME
+    linter:   #//job NAME.
       jobs:
       -linter
