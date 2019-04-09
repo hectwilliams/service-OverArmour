@@ -13,7 +13,7 @@ var test = (callback)=> {
   };
 
   s3.listObjectsV2(param, (err, data)=> {
-      if (err) {
+    if (err) {
       callback(true);
     } else {
       callback(null, parse.fetchImages(data));

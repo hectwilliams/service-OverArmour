@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import Mapper from '../testimonial/mapper';
 
 class TestimonialEntry extends React.Component {
@@ -6,23 +6,22 @@ class TestimonialEntry extends React.Component {
     super(props);
     this.state = {
       dbData: this.props.dbData
-    }
+    };
   }
 
-  render(){
-  return(
-    <div>
-    { this.props.dbData ?this.props.dbData.map( (x,i) =>(
-        <Mapper  key={i} dbStatic = {this.props.dbStatic}  dbData = {x}
-        release = {this.props.release}
-
-        />
-    )) : ''}
-    </div>
-  )}
-
+  render() {
+    return (
+      <div>
+        {this.props.dbData ? this.props.dbData.map( (x, i) => (
+          <Mapper key = {i} dbStatic = {this.props.dbStatic} dbData = {x}
+            release = {this.props.release}
+          />
+        )) : ''}
+      </div>
+    );
+  }
 }
-export default TestimonialEntry ;
+export default TestimonialEntry;
 
 
 

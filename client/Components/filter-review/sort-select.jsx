@@ -1,7 +1,7 @@
 import React from 'react';
 
 class SortSelection extends React.Component {
-  constructor(props){
+  constructor(props) {
     super(props);
   }
   render() {
@@ -9,7 +9,7 @@ class SortSelection extends React.Component {
       <div className="segment">
         <div className='shift'>
           <small >What is relevancy sort</small>
-          <div >
+          <div>
             <select className="small" >
               <option> Choose Sort Order</option>
               <option >Most Relevant</option>
@@ -19,6 +19,7 @@ class SortSelection extends React.Component {
           </div>
         </div>
       </div>
-    )};
+    );
+  }
 }
 export default SortSelection;

@@ -1,7 +1,7 @@
 import React from 'react';
 import Form from './form';
 
-class  Modal  extends React.Component   {
+class Modal extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -10,14 +10,13 @@ class  Modal  extends React.Component   {
     return (
       <div className = 'modal'>
         <nav className='modal-className'></nav>
-          <Form
+        <Form
           releaseModal = {this.props.releaseModal.bind(this)}
           addTestimonial = {this.props.addTestimonial.bind(this)}
-          />
-          <nav className='modal-className'></nav>
-        </div>
-    )
+        />
+        <nav className='modal-className'></nav>
+      </div>
+    );
   }
-
 }
 export default Modal;

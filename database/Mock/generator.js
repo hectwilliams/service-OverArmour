@@ -5,18 +5,21 @@ faker.seed(100);
 var genPID = function() { //quiet for now
   return `pid_${faker.random.number({min: 1, max: 1000})}`;
 };
+var timeStamp = function() {
+  result = '' + faker.random.number({min: 0, max: 1000});
+  return result;
+};
 
 var genTestimonials = function() {
   var obj = {};
 
-  obj.height =  `${faker.random.number({min: 5, max:7})} '${faker.random.number({min: 0, max:11})}"`
-  obj.athleteType = faker.random.arrayElement(['Avid', 'Casual' ,'Professional']);
-  obj.sportsInterest = faker.random.arrayElement(['Basketball', 'Soccer', 'Basball, Softball', 'Field Hockey', 'Football', 'Golf', 'Lacrosse', 'Rugby', 'Volleyball']);
-
+  obj.height = `${faker.random.number({min: 5, max: 7})} '${faker.random.number({min: 0, max: 11})}"`;
+  obj.athleteType = faker.random.arrayElement(['Avid', 'Casual', 'Professional']);
+  obj.sportsInterest = faker.random.arrayElement(['Basketball', 'Soccer', 'Basball', 'Softball', 'Field Hockey', 'Football', 'Golf', 'Lacrosse', 'Rugby', 'Volleyball']);
   obj.gender = faker.random.arrayElement(['male', 'female']);
   obj.user = faker.name.firstName({male: 22});
   obj.date = faker.date.recent();
-  obj.sizePurchased = faker.random.arrayElement(['XS','SM', 'MD', 'LG','XL', 'XXL', '3XL']);
+  obj.sizePurchased = faker.random.arrayElement(['XS', 'SM', 'MD', 'LG', 'XL', 'XXL', '3XL']);
   obj.performanceRating = faker.random.number({min: 0, max: 7});
   obj.comfortRating = faker.random.number({min: 0, max: 7});
   obj.sizeRating = faker.random.number({min: 0, max: 7});
@@ -29,16 +32,11 @@ var genTestimonials = function() {
   obj.logoA = faker.image.abstract();
   obj.logoB = faker.image.nature();
   obj.dislikes = [faker.random.number(100), faker.random.number(100)];
-  obj.responseDate = faker.date.past()
+  obj.responseDate = faker.date.past();
   obj.timestamp = timeStamp();
   return obj;
 };
 
-var timeStamp = function() {
-  result='';
-    result = ''+ faker.random.number({min: 0, max: 1000});
-  return result;
-};
 
 var generateTable = function(callback) {
   const reviewsCount = 100;
@@ -48,7 +46,7 @@ var generateTable = function(callback) {
     docs.push( genTestimonials());
   }
   db.accessHelpers.writeCollection(docs, tableName, (err, msg, db)=>{
-    if(err) {
+    if (err) {
       console.log('error');
     }
     db.close();

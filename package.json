@@ -14,6 +14,7 @@
     ]
   },
   "scripts": {
+    "linter" : "eslint --ext .jsx,.js  ./database ./amazon ./client ./server ",
     "test": "jest --watchAll --coverage",
     "server-dev": "nodemon ./server/server.js",
     "react-dev": "webpack -d --watch",
