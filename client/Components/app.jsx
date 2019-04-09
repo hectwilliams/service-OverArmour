@@ -17,7 +17,6 @@ var addReviewToDatabase = function(data, pid, hostname, path, callback) {
       callback(null);
     },
     error: (err)=> {
-      console.log('duplicate insertion');
       callback(true);
     },
   });
@@ -37,6 +36,7 @@ class App extends React.Component {
   addTestimonial (obj) {
     addReviewToDatabase(obj, this.props.pid, this.props.host, this.props.path, (err)=>{
       if (err) {
+
       } else {
         this.setState({
           dbData: [obj].concat(this.state.dbData), rating: obj.stars, release: true});
