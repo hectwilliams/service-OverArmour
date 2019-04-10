@@ -10,6 +10,7 @@ var options = {
 
 const unique = {
   user: 1,
+  pid: 1
 };
 
 var client = new MongoClient(uri, options);
@@ -25,17 +26,16 @@ var clearDatabase = function(callback) {
 };
 
 var readCollection = (id, callback)=> {
-  const query = {pid: id};
-  console.log(query)
+  var query = [ {pid: {$eq: parseInt(id)}}, {pid: {$eq: String(id)}} ];
   const sortby = {timestamp: -1};
   client.connect((err, db)=> {
-    console.log('Connected successfully to server');
-
-    db.db(dbName).collection(tableName).find(query).toArray((err, dbDocs)=> {
-      console.log(dbDocs)
+    const collection = db.db(dbName).collection(tableName);
+    collection.find( {$or: query}).toArray((err, dbDocs)=> {
       if (err) {
+        console.log(err, ' error reading')
         callback(true);
       } else {
+        console.log('read successful');
         callback(err, dbDocs, client);
       }
     });
@@ -46,23 +46,24 @@ var writeCollection_Array = (arrayOfObjects, id, callback)=> {
   client.connect(function(err, db) {
     const collection = db.db(dbName).collection(tableName);
     collection.createIndex(unique, {unique: true});
-
-    collection.insertMany( arrayOfObjects, (err, promise)=> {
+    collection.insertMany( arrayOfObjects, (err, report)=> {
       if (err) {
         /* errror */
+        console.log('error')
       } else if (callback) {
-        callback(err, promise, client);
+        callback(err, report, client);
       }
 
     });
   });
 };
-var writeOnceToCollection = (obj, collectionName, callback)=> {
+var writeOnceToCollection = (obj, callback)=> {
   client.connect(function(err, db) {
-    db.db(dbName).collection(collectionName).createIndex(unique, {unique: true});
-
-    db.db(dbName).collection(collectionName).insertOne( obj, (err, promise)=> {
+    const collection = db.db(dbName).collection(tableName);
+    collection.createIndex(unique, {unique: true});
+    collection.insertOne( obj, (err)=> {
       if ( err ) {
+        console.log(err)
         callback(err, client);
       } else if (callback) {
         callback(err, client);
@@ -130,8 +131,6 @@ var updateCollection = (query, data, callback)=> {
     });
   });
 };
-
-
 
 exports.accessHelpers = {
   readCollection,

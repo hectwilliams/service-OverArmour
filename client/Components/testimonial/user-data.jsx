@@ -49,11 +49,17 @@ class UserData extends React.Component {
             <Likes
               user = {this.props.info.user}
               currCount = {this.props.info.likes}
+              id = {this.props.pid}
+              release = {this.props.release}
+
             />
 
             <DisLikes
               user = {this.props.info.user}
               currCount ={this.props.info.dislikes}
+              id = {this.props.pid}
+              release = {this.props.release}
+
             />
 
           </div>

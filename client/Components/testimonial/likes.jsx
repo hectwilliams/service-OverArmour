@@ -1,18 +1,14 @@
 import React from 'react';
 import $ from 'jquery';
 
-var updateLikeCount = function(user, data, callback) {
-  const id = 'pid3020612-405/';
-  const host = 'http://localhost:3005/';
-  const path = 'en-us/ua-curry-6-basketball-shoes/';
-  const url = 'likes/';
-
+var updatelikeCount = function(user, data, id, callback) {
   $.ajax({
     method: 'PUT',
-    url: url,
+    url: '/likes',
     type: 'json',
-    data: {user: user, data: data},
+    data: {user: user, data: data, id: id},
     success: ()=> {
+
       callback(null);
     },
     error: ()=> {
@@ -21,21 +17,26 @@ var updateLikeCount = function(user, data, callback) {
   });
 };
 
-
 class Likes extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      count: this.props.currCount
+      count: this.props.currCount,
+      update : false
     };
   }
 
+
+
   clickHanlder(e) {
-    var data = ++e.target.parentNode.parentNode.lastChild.innerText;
-    updateLikeCount( this.props.user, data, (err)=> {
+    console.log(this.props.id)
+
+    var data = parseInt(e.target.parentNode.parentNode.lastChild.innerText) + 1;
+    updatelikeCount( this.props.user, data, this.props.id ,(err)=> {
       if (!err) {
         this.setState({
-          count: data
+          count: data,
+          update: true
         });
       }
     });
@@ -45,9 +46,9 @@ class Likes extends React.Component {
     return (
       <span>
         <span className='likes-entry'>
-          <button onClick={this.clickHanlder.bind(this)} className=' symbol likes '></button>
+          <button onClick={this.clickHanlder.bind(this)} className ='symbol likes'></button>
         </span>
-        <small className= 'counter' > {!this.props.currCount ? 0 : this.state.count}</small>
+        <small className= 'counter' > { this.state.update ?this.state.count :this.props.release? 0: this.state.count}</small>
       </span>
     );
   }
