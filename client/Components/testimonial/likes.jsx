@@ -5,7 +5,7 @@ var updateLikeCount = function(user, data, callback) {
   const id = 'pid3020612-405/';
   const host = 'http://localhost:3005/';
   const path = 'en-us/ua-curry-6-basketball-shoes/';
-  const url = host + path + id + 'likes/';
+  const url = 'likes/';
 
   $.ajax({
     method: 'PUT',

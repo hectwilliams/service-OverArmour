@@ -4,10 +4,9 @@ import FilterReviewEntry from './entries/filter-review-entry';
 import TestimonialEntry from './entries/testimonial-entry';
 import $ from 'jquery';
 
-var addReviewToDatabase = function(data, pid, hostname, path, callback) {
-  const endpoint = 'add-review/';
-  const uri = hostname + path + pid + endpoint;
-
+var addReviewToDatabase = function(data, uri, callback) {
+  console.log('ADD REIVEWW ')
+  console.log(data)
   $ .ajax({
     method: 'PUT',
     url: uri,
@@ -34,7 +33,7 @@ class App extends React.Component {
   }
 
   addTestimonial (obj) {
-    addReviewToDatabase(obj, this.props.pid, this.props.host, this.props.path, (err)=>{
+    addReviewToDatabase(obj,this.props.path, (err)=>{
       if (err) {
 
       } else {
@@ -44,6 +43,8 @@ class App extends React.Component {
     });
   }
 
+  componentDidMount() {
+  }
   render() {
     return (
       <div className="app">

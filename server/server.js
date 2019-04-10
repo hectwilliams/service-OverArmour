@@ -4,10 +4,11 @@ var express = require('express');
 var amazon = require('../amazon/index');
 var bodyParser = require('body-parser');
 var app = express();
+var path = require('path');
 var faker = require('faker');
 
-const uri = '/en-us/ua-curry-6-basketball-shoes/pid3020612-405';
 
+const uri = '';
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.static('./public'));
@@ -15,18 +16,10 @@ app.use((req, res, next)=>{
   res.header('Access-Control-Allow-Origin', '*');
   next();
 });
+
+
 // db.accessHelpers.clearDatabase(); // --> DEBUG ONLY :)
-app.get( `${uri}/review-features`, (req, res )=> {
-  res.send({message: {msg: 'more-review-comming soon'}});
-});
-
-app.get( `${uri}/shoe-testimonial`, (req, res )=> {
-  db.accessHelpers.readCollection( (dbCollection)=>{
-    console.log(dbCollection);
-  });
-  res.send({message: {msg: 'more-testimonials-comming soon'}});
-});
-
+//
 app.get( `${uri}/aws`, (req, res )=> {
   s3.accessHelpers.test((data)=> {
     res.send({message: data});
@@ -35,15 +28,18 @@ app.get( `${uri}/aws`, (req, res )=> {
 
 app.get(`${uri}/init`, (req, res)=> {
 
-  db.accessHelpers.readCollection((err, dbCollection, dbCli)=>{
+  db.accessHelpers.readCollection(0, (err, dbCollection)=>{
+    console.log(req.path)
+    // return res.status(200).end();
     if (err) {
       /*error*/
       console.log('read error');
       res.send(500);
       res.end();
     } else {
-
+      console.log(dbCollection);
       db.accessHelpers.sortCollection(dbCollection); //mutating! -always serving ordered reviews, sorted by most recent post at the top
+
       amazon.accessHelpers.fetchStatic((err, data) => {
         if (!err) {
           res.status(200);
@@ -60,6 +56,11 @@ app.get(`${uri}/init`, (req, res)=> {
       });
     }
   });
+});
+
+app.get(`${uri}/:id`, (req,res)=> {
+  var getPath =  path.join ( __dirname, '..', 'public', 'index.html') ;
+  res.sendFile( getPath);
 });
 
 app.put(`${uri}/add-review`, (req, res)=>{

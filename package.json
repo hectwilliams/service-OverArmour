@@ -14,7 +14,7 @@
     ]
   },
   "scripts": {
-    "linter" : "eslint --ext .jsx,.js  ./database ./amazon ./client ./server ",
+    "linter": "eslint --ext .jsx,.js  ./database ./amazon ./client ./server ",
     "test": "jest --watchAll --coverage",
     "server-dev": "nodemon ./server/server.js",
     "react-dev": "webpack -d --watch",
@@ -22,23 +22,24 @@
     "seed": "node ./database/seedData.js"
   },
   "dependencies": {
-    "react": "16.8.6",
-    "react-dom": "16.8.6",
-    "express": "4.16.4",
-    "body-parser": "1.18.3",
-    "webpack": "4.29.6",
-    "webpack-cli": "3.3.0",
     "@babel/core": "7.4.0",
     "@babel/preset-env": "7.4.2",
     "@babel/preset-react": "7.0.0",
+    "aws-sdk": "2.432.0",
     "babel-loader": "8.0.5",
+    "body-parser": "1.18.3",
+    "eslint": "5.15.3",
+    "express": "4.16.4",
+    "faker": "4.1.0",
+    "jquery": "3.3.1",
     "mongodb": "3.2.2",
     "mongoose": "5.4.20",
-    "eslint": "5.15.3",
+    "path": "^0.12.7",
+    "react": "16.8.6",
+    "react-dom": "16.8.6",
     "request": "2.88.0",
-    "faker": "4.1.0",
-    "aws-sdk": "2.432.0",
-    "jquery": "3.3.1"
+    "webpack": "4.29.6",
+    "webpack-cli": "3.3.0"
   },
   "devDependencies": {
     "babel-jest": "^24.7.0",
@@ -46,6 +47,5 @@
     "enzyme-adapter-react-16": "^1.11.2",
     "eslint-config-hackreactor": "git://github.com/reactorcore/eslint-config-hackreactor",
     "jest": "^24.7.0"
-
   }
 }

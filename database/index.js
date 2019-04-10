@@ -1,7 +1,7 @@
 const MongoClient = require('mongodb').MongoClient;
 const uri = 'mongodb://localhost:27017';
-const dbName = 'reviews';
-var tableName = 'pid3020612-405';
+const dbName = 'under-armour';
+var tableName = 'reviews';
 
 var options = {
   useNewUrlParser: true,
@@ -15,7 +15,7 @@ const unique = {
 var client = new MongoClient(uri, options);
 var clearDatabase = function(callback) {
   client.connect((err, db)=> {
-    db.db('reviews').collection(tableName).deleteMany( (err, resp)=> {
+    db.db(dbName).collection(tableName).deleteMany( (err, resp)=> {
       if (callback) {
         callback(resp);
       }
@@ -24,10 +24,15 @@ var clearDatabase = function(callback) {
   });
 };
 
-var readCollection = (callback)=> {
+var readCollection = (id, callback)=> {
+  const query = {pid: id};
+  console.log(query)
+  const sortby = {timestamp: -1};
   client.connect((err, db)=> {
     console.log('Connected successfully to server');
-    db.db(dbName).collection(tableName).find().toArray((err, dbDocs)=> {
+
+    db.db(dbName).collection(tableName).find(query).toArray((err, dbDocs)=> {
+      console.log(dbDocs)
       if (err) {
         callback(true);
       } else {
@@ -37,13 +42,12 @@ var readCollection = (callback)=> {
   });
 };
 
-var writeCollection = (obj, collectionName, callback)=> {
-
+var writeCollection_Array = (arrayOfObjects, id, callback)=> {
   client.connect(function(err, db) {
-    var db = db.db(dbName);
-    var collection = db.collection(tableName);
+    const collection = db.db(dbName).collection(tableName);
     collection.createIndex(unique, {unique: true});
-    collection.insertMany( obj, (err, promise)=> {
+
+    collection.insertMany( arrayOfObjects, (err, promise)=> {
       if (err) {
         /* errror */
       } else if (callback) {
@@ -117,7 +121,7 @@ var updateCollection = (query, data, callback)=> {
     $set: data
   };
   client.connect ((err, db)=>{
-    db.db(dbName).collection(tableName).update(query, set, (err)=>{
+    db.db(dbName).collection(tableName).update(query, set, (err)=> {
       if (err) {
         callback(true, client);
       } else {
@@ -131,7 +135,7 @@ var updateCollection = (query, data, callback)=> {
 
 exports.accessHelpers = {
   readCollection,
-  writeCollection,
+  writeCollection_Array,
   clearDatabase,
   writeOnceToCollection,
   sortCollection,
