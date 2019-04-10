@@ -10,47 +10,52 @@ var timeStamp = function() {
   return result;
 };
 
-var genTestimonials = function() {
-  var obj = {};
-
-  obj.height = `${faker.random.number({min: 5, max: 7})} '${faker.random.number({min: 0, max: 11})}"`;
-  obj.athleteType = faker.random.arrayElement(['Avid', 'Casual', 'Professional']);
-  obj.sportsInterest = faker.random.arrayElement(['Basketball', 'Soccer', 'Basball', 'Softball', 'Field Hockey', 'Football', 'Golf', 'Lacrosse', 'Rugby', 'Volleyball']);
-  obj.gender = faker.random.arrayElement(['male', 'female']);
-  obj.user = faker.name.firstName({male: 22});
-  obj.date = faker.date.recent();
-  obj.sizePurchased = faker.random.arrayElement(['XS', 'SM', 'MD', 'LG', 'XL', 'XXL', '3XL']);
-  obj.performanceRating = faker.random.number({min: 0, max: 7});
-  obj.comfortRating = faker.random.number({min: 0, max: 7});
-  obj.sizeRating = faker.random.number({min: 0, max: 7});
-  obj.stars = faker.random.number({min: 0, max: 5});
-  obj.subject = faker.lorem.sentences(4);
-  obj.review = faker.lorem.sentences(4);
-  obj.picture = faker.image.sports(1, 100);
-  obj.likes = [faker.random.number(100), faker.random.number(100)];
-  obj.response = faker.lorem.sentences(4);
-  obj.logoA = faker.image.abstract();
-  obj.logoB = faker.image.nature();
-  obj.dislikes = [faker.random.number(100), faker.random.number(100)];
-  obj.responseDate = faker.date.past();
-  obj.timestamp = timeStamp();
-  return obj;
+var genTestimonials = function(count, pid) {
+  var storage = [];
+  for (var i = 0; i < count; i++) {
+    var obj = {};
+    obj.height = `${faker.random.number({min: 5, max: 7})} '${faker.random.number({min: 0, max: 11})}"`;
+    obj.athleteType = faker.random.arrayElement(['Avid', 'Casual', 'Professional']);
+    obj.sportsInterest = faker.random.arrayElement(['Basketball', 'Soccer', 'Basball', 'Softball', 'Field Hockey', 'Football', 'Golf', 'Lacrosse', 'Rugby', 'Volleyball']);
+    obj.gender = faker.random.arrayElement(['male', 'female']);
+    obj.user = faker.name.firstName({male: 22});
+    obj.date = faker.date.recent();
+    obj.sizePurchased = faker.random.arrayElement(['XS', 'SM', 'MD', 'LG', 'XL', 'XXL', '3XL']);
+    obj.performanceRating = faker.random.number({min: 0, max: 7});
+    obj.comfortRating = faker.random.number({min: 0, max: 7});
+    obj.sizeRating = faker.random.number({min: 0, max: 7});
+    obj.stars = faker.random.number({min: 0, max: 5});
+    obj.subject = faker.lorem.sentences(4);
+    obj.review = faker.lorem.sentences(4);
+    obj.picture = faker.image.sports(1, 100);
+    obj.likes = [faker.random.number(100), faker.random.number(100)];
+    obj.response = faker.lorem.sentences(4);
+    obj.logoA = faker.image.technics();
+    obj.logoB = faker.image.technics();
+    obj.dislikes = [faker.random.number(100), faker.random.number(100)];
+    obj.responseDate = faker.date.past();
+    obj.timestamp = timeStamp();
+    obj.pid = pid;
+    storage.push(obj);
+  }
+  return storage;
 };
 
-
 var generateTable = function(callback) {
-  const reviewsCount = 100;
-  var tableName = 'pid3020612-405'; //product#
-  var docs = [];
-  for (var i = 0; i < reviewsCount; i++) {
-    docs.push( genTestimonials());
+  const shoeCount = 100;
+  var testimonial;
+  var rand;
+
+  for(var i = 0; i <= shoeCount; i++) {
+    rand = faker.random.number({min: 5, max: 7});
+    testimonial = genTestimonials(rand, i);
+    db.accessHelpers.writeCollection_Array(testimonial, i , (err, msg, db)=> {
+      if (err) {
+        console.log('error');
+      }
+      db.close();
+    });
   }
-  db.accessHelpers.writeCollection(docs, tableName, (err, msg, db)=>{
-    if (err) {
-      console.log('error');
-    }
-    db.close();
-  });
 };
 
 var run = function() {

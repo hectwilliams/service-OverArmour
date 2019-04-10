@@ -12,7 +12,7 @@ class ProductReviewSummaryEntry extends React.Component {
       <div className="review-summary-container">
         <div className='ident'></div>
         <AvgRating
-          stars = {this.props.avgStats.stars > 5 || this.props.avgStats.stars < 0 ? 0 : this.props.avgStats.stars}
+          stars = {!this.props.avgStats.stars ? 0 : this.props.avgStats.stars}
         />
         <RatingBreakdown
           starBreakdown = {this.props.avgStats.histoStars}

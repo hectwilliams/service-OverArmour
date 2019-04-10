@@ -1,7 +1,7 @@
 const MongoClient = require('mongodb').MongoClient;
 const uri = 'mongodb://localhost:27017';
-const dbName = 'reviews';
-var tableName = 'pid3020612-405';
+const dbName = 'under-armour';
+var tableName = 'reviews';
 
 var options = {
   useNewUrlParser: true,
@@ -10,12 +10,13 @@ var options = {
 
 const unique = {
   user: 1,
+  pid: 1
 };
 
 var client = new MongoClient(uri, options);
 var clearDatabase = function(callback) {
   client.connect((err, db)=> {
-    db.db('reviews').collection(tableName).deleteMany( (err, resp)=> {
+    db.db(dbName).collection(tableName).deleteMany( (err, resp)=> {
       if (callback) {
         callback(resp);
       }
@@ -24,41 +25,45 @@ var clearDatabase = function(callback) {
   });
 };
 
-var readCollection = (callback)=> {
+var readCollection = (id, callback)=> {
+  var query = [ {pid: {$eq: parseInt(id)}}, {pid: {$eq: String(id)}} ];
+  const sortby = {timestamp: -1};
   client.connect((err, db)=> {
-    console.log('Connected successfully to server');
-    db.db(dbName).collection(tableName).find().toArray((err, dbDocs)=> {
+    const collection = db.db(dbName).collection(tableName);
+    collection.find( {$or: query}).toArray((err, dbDocs)=> {
       if (err) {
+        console.log(err, ' error reading')
         callback(true);
       } else {
+        console.log('read successful');
         callback(err, dbDocs, client);
       }
     });
   });
 };
 
-var writeCollection = (obj, collectionName, callback)=> {
-
+var writeCollection_Array = (arrayOfObjects, id, callback)=> {
   client.connect(function(err, db) {
-    var db = db.db(dbName);
-    var collection = db.collection(tableName);
+    const collection = db.db(dbName).collection(tableName);
     collection.createIndex(unique, {unique: true});
-    collection.insertMany( obj, (err, promise)=> {
+    collection.insertMany( arrayOfObjects, (err, report)=> {
       if (err) {
         /* errror */
+        console.log('error')
       } else if (callback) {
-        callback(err, promise, client);
+        callback(err, report, client);
       }
 
     });
   });
 };
-var writeOnceToCollection = (obj, collectionName, callback)=> {
+var writeOnceToCollection = (obj, callback)=> {
   client.connect(function(err, db) {
-    db.db(dbName).collection(collectionName).createIndex(unique, {unique: true});
-
-    db.db(dbName).collection(collectionName).insertOne( obj, (err, promise)=> {
+    const collection = db.db(dbName).collection(tableName);
+    collection.createIndex(unique, {unique: true});
+    collection.insertOne( obj, (err)=> {
       if ( err ) {
+        console.log(err)
         callback(err, client);
       } else if (callback) {
         callback(err, client);
@@ -117,7 +122,7 @@ var updateCollection = (query, data, callback)=> {
     $set: data
   };
   client.connect ((err, db)=>{
-    db.db(dbName).collection(tableName).update(query, set, (err)=>{
+    db.db(dbName).collection(tableName).update(query, set, (err)=> {
       if (err) {
         callback(true, client);
       } else {
@@ -127,11 +132,9 @@ var updateCollection = (query, data, callback)=> {
   });
 };
 
-
-
 exports.accessHelpers = {
   readCollection,
-  writeCollection,
+  writeCollection_Array,
   clearDatabase,
   writeOnceToCollection,
   sortCollection,

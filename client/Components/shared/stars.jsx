@@ -19,27 +19,27 @@ class Stars extends React.Component {
     return (
       <div className='medium'>
         {
-          this.props.stars === 1 && this.props.release ?
+          this.props.stars == 1 && this.props.release ?
             <OneStar subject ={this.props.subject}/>
-            : this.props.stars === 2 && this.props.release ?
+            : this.props.stars == 2 && this.props.release ?
               <TwoStar
                 fetch = {this.props.fetch.bind(this)}
                 subject ={this.props.subject}
               />
 
-              : this.props.stars === 3 && this.props.release ?
+              : this.props.stars == 3 && this.props.release ?
                 <ThreeStar
                   fetch = {this.props.fetch.bind(this)}
                   subject ={this.props.subject}
                 />
 
-                : this.props.stars === 4 && this.props.release ?
+                : this.props.stars == 4 && this.props.release ?
                   <FourStar
                     fetch = {this.props.fetch.bind(this)}
                     subject ={this.props.subject}
                   />
 
-                  : this.props.stars === 5 && this.props.release ?
+                  : this.props.stars == 5 && this.props.release ?
                     <FiveStar
                       fetch = {this.props.fetch.bind(this)}
                       subject = {this.props.subject}

@@ -1,7 +1,6 @@
 import React from 'react';
 import StarsEntry from '../shared/stars-entry';
 
-
 var getDate = () => {
   var sizeCheck = (x) => {
     if ((x).toString() !== 2) {
@@ -34,6 +33,8 @@ var reviewer = function() {
   this.logoA = 'null';
   this.logoB = 'null';
   this.timestamp = Date.now();
+  this.pid = HectronPluck(window.location.href) =='init' ? 0 : HectronPluck(window.location.href) ;
+
 };
 reviewer.prototype.loadPicture = function() {
 };
@@ -174,3 +175,13 @@ class Form extends React.Component {
 
 
 export default Form;
+
+var HectronPluck = (url) => {
+  var idx = url.lastIndexOf('/')+1;
+  var tail =  url.slice(idx) ;
+  if ( tail > 0 && tail <= 100) {
+    return tail ;
+  }
+  return 'init';
+};
+

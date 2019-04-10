@@ -22,7 +22,7 @@ class StarsEntry extends React.Component {
       stars: 0,
       cache: 'null',
     });
-    this.props.fetch(0);
+    // this.props.fetch(0);
   }
 
   render() {

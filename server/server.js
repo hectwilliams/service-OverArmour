@@ -4,9 +4,9 @@ var express = require('express');
 var amazon = require('../amazon/index');
 var bodyParser = require('body-parser');
 var app = express();
+var path = require('path');
 var faker = require('faker');
-
-const uri = '/en-us/ua-curry-6-basketball-shoes/pid3020612-405';
+const uri = '';
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
@@ -15,17 +15,58 @@ app.use((req, res, next)=>{
   res.header('Access-Control-Allow-Origin', '*');
   next();
 });
-// db.accessHelpers.clearDatabase(); // --> DEBUG ONLY :)
-app.get( `${uri}/review-features`, (req, res )=> {
-  res.send({message: {msg: 'more-review-comming soon'}});
+
+
+
+
+
+app.put(`${uri}/add-review`, (req, res)=> {
+  console.log('vcv')
+  // var re = /pid.+-[0-9]{3}?/;
+  // tableName = ((req.path)).match(re);
+  // if (tableName[0]) {
+  //   tableName = tableName[0];
+  // }
+
+  db.accessHelpers.writeOnceToCollection(req.body, (err, db )=> {
+    if (err) {
+      res.status(200);
+    } else {
+      res.status(200);
+    }
+    res.end();
+    db.close();
+  });
 });
 
-app.get( `${uri}/shoe-testimonial`, (req, res )=> {
-  db.accessHelpers.readCollection( (dbCollection)=>{
-    console.log(dbCollection);
+
+
+app.put(`${uri}/likes`, (req, res)=> {
+  db.accessHelpers.updateCollection({user: req.body.user,id: req.body.id}, {likes: req.body.data}, (err, db)=> {
+    if (err) {
+      res.status(404);
+    } else {
+      res.status(200);
+    }
+    res.end();
+    db.close();
   });
-  res.send({message: {msg: 'more-testimonials-comming soon'}});
 });
+
+app.put(`${uri}/dislikes`, (req, res)=> {
+  res.status(200).end()
+  db.accessHelpers.updateCollection({user: req.body.user, id: req.body.id}, {dislikes: req.body.data}, (err, db)=> {
+    if (err) {
+      res.status(404);
+    } else {
+      res.status(200);
+    }
+    res.end();
+    db.close();
+  });
+});
+
+// db.accessHelpers.clearDatabase(); // --> DEBUG ONLY :);
 
 app.get( `${uri}/aws`, (req, res )=> {
   s3.accessHelpers.test((data)=> {
@@ -33,16 +74,24 @@ app.get( `${uri}/aws`, (req, res )=> {
   });
 });
 
-app.get(`${uri}/init`, (req, res)=> {
 
-  db.accessHelpers.readCollection((err, dbCollection, dbCli)=>{
+app.get( [`${uri}/init`, `${uri}/reviews/:id` ], (req, res)=> {
+  var id = null;
+  var idx = req.path.lastIndexOf('/');
+
+  if (req.path.indexOf('review') !== -1) {
+    id = req.path.slice(idx + 1)
+  } else {
+    id = 0;
+  }
+
+  db.accessHelpers.readCollection(id, (err, dbCollection)=>{
     if (err) {
       /*error*/
       console.log('read error');
       res.send(500);
       res.end();
     } else {
-
       db.accessHelpers.sortCollection(dbCollection); //mutating! -always serving ordered reviews, sorted by most recent post at the top
       amazon.accessHelpers.fetchStatic((err, data) => {
         if (!err) {
@@ -62,49 +111,23 @@ app.get(`${uri}/init`, (req, res)=> {
   });
 });
 
-app.put(`${uri}/add-review`, (req, res)=>{
-  var re = /pid.+-[0-9]{3}?/;
-  tableName = ((req.path)).match(re);
-  if (tableName[0]) {
-    tableName = tableName[0];
-  }
+app.use(`${uri}/:id`, (req,res,next)=> {
+  var getPath =  path.join ( __dirname, '..', 'public', 'index.html') ;
+  res.sendFile( getPath);
 
-  db.accessHelpers.writeOnceToCollection(req.body, tableName, (err, db )=>{
-    if (err) {
-      res.status(404);
-    } else {
-      res.status(200);
-    }
-    res.end();
-    db.close();
-  });
-});
 
-app.put(`${uri}/likes`, (req, res)=>{
-  db.accessHelpers.updateCollection({user: req.body.user}, {likes: req.body.data}, (err, db)=>{
-    if (err) {
-      res.status(404);
-    } else {
-      res.status(200);
-    }
-    res.end();
-    db.close();
-  });
+
+
+
+
+
+
 });
 
 
 
-app.put(`${uri}/dislikes`, (req, res)=>{
-  db.accessHelpers.updateCollection( {user: req.body.user}, {dislikes: req.body.data }, (err, db)=>{
-    if (err) {
-      res.status(404);
-    } else {
-      res.status(200);
-    }
-    res.end();
-    db.close();
-  });
-});
+
+
 
 app.listen(3005, ()=>{
   console.log('listening on port 3005');
