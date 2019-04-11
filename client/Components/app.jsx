@@ -4,21 +4,7 @@ import FilterReviewEntry from './entries/filter-review-entry';
 import TestimonialEntry from './entries/testimonial-entry';
 import $ from 'jquery';
 
-var addReviewToDatabase = function(data, callback) {
-  console.log(data)
-  $ .ajax({
-    method: 'PUT',
-    url: 'add-review',
-    type: 'json',
-    data: data,
-    success: ()=> {
-      callback(null);
-    },
-    error: (err)=> {
-      callback(true);
-    },
-  });
-};
+
 
 class App extends React.Component {
   constructor(props) {
@@ -29,7 +15,6 @@ class App extends React.Component {
   render() {
     return (
       <div className="app">
-
         <ProductReviewSummaryEntry
           avgStats = {this.props.avgStats}
         />

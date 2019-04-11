@@ -1,4 +1,5 @@
 import React from 'react';
+import FilterOptionCss from '../css-modules/css-filter-review/FilterReview.module.css';
 
 class FilterOption extends React.Component {
   constructor(props) {
@@ -8,27 +9,27 @@ class FilterOption extends React.Component {
   render() {
     return (
 
-      <div className="segment">
-        <span className="medium">Advanced filters</span>
-        <div className="filter-selection-option-list">
-          <div className='filter-selection-option'>
-            <select className='filter-selection-option-font'>
+      <div className={FilterOptionCss["segment"]}>
+        <span className={FilterOptionCss["medium"]}>Advanced filters</span>
+        <div className={FilterOptionCss["filter-selection-option-list"]}>
+          <div className={FilterOptionCss['filter-selection-option']}>
+            <select className={FilterOptionCss['filter-selection-option-font']}>
               <option>Gender</option>
               <option>Male</option>
               <option>Female</option>
             </select>
           </div>
-          <div className='filter-selection-option'>
-            <select className='filter-selection-option-font'>
+          <div className={FilterOptionCss['filter-selection-option']}>
+            <select className={FilterOptionCss['filter-selection-option-font']}>
               <option>Athlete Type</option>
               <option>Avid</option>
               <option>Casual</option>
               <option>Professional</option>
             </select>
           </div>
-          <div className='filter-selection-option'>
-            <select className='filter-selection-option-font'>
-              <option className='font'>Sport Interest</option>
+          <div className={FilterOptionCss['filter-selection-option']}>
+            <select className={FilterOptionCss['filter-selection-option-font']}>
+              <option >Sport Interest</option>
               <option>Sports Interest</option>
               <option>Baseball</option>
               <option>Basketball</option>
@@ -54,8 +55,8 @@ class FilterOption extends React.Component {
             </select>
           </div>
 
-          <div className='filter-selection-option'>
-            <select className='filter-selection-option-font'>
+          <div className={FilterOptionCss['filter-selection-option']}>
+            <select className={FilterOptionCss['filter-selection-option-font']}>
               <option>Hieght</option>
               <option> {'<5'} </option>
               <option>5'1"-5'3"</option>
@@ -66,8 +67,8 @@ class FilterOption extends React.Component {
             </select>
           </div>
 
-          <div className='filter-selection-option'>
-            <select className='filter-selection-option-font'>
+          <div className={FilterOptionCss['filter-selection-option']}>
+            <select className={FilterOptionCss['filter-selection-option-font']}>
               <option>Size Purchased</option>
               <option>XS</option>
               <option>SM</option>
@@ -79,7 +80,7 @@ class FilterOption extends React.Component {
             </select>
           </div>
         </div>
-        <div className='filter-selection-option-font' >Click on filters to refine your results</div>
+        <div className={FilterOptionCss['filter-selection-option-font']} >Click on filters to refine your results</div>
       </div>
     );
   }

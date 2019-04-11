@@ -1,8 +1,9 @@
 import React from 'react';
+import Testimonial from '../css-modules/css-testimonial/Testimonial.module.css';
 
 var UserInfo = ({info}) => (
-  <div className="testimonial-user-who">
-    <ul className="list">
+  <div className={Testimonial["testimonial-user-who"]}>
+    <ul className={Testimonial["list"]}>
       <li>  <strong> Posted by: </strong>{info.user}</li>
       <li>  <strong>  Date: </strong> {info.date.slice(0,10)}  </li>
       <li>  <strong> Gender: </strong>  {info.gender}  </li>

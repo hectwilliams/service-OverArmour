@@ -1,5 +1,6 @@
 import React from 'react';
 import $ from 'jquery';
+import Testimonial from '../css-modules/css-testimonial/Testimonial.module.css'
 
 var updatelikeCount = function(user, data, id, callback) {
   $.ajax({
@@ -29,8 +30,6 @@ class Likes extends React.Component {
 
 
   clickHanlder(e) {
-    console.log(this.props.id)
-
     var data = parseInt(e.target.parentNode.parentNode.lastChild.innerText) + 1;
     updatelikeCount( this.props.user, data, this.props.id ,(err)=> {
       if (!err) {
@@ -45,10 +44,11 @@ class Likes extends React.Component {
   render() {
     return (
       <span>
-        <span className='likes-entry'>
-          <button onClick={this.clickHanlder.bind(this)} className ='symbol likes'></button>
+        <span className={Testimonial['likes-entry']}>
+        <button onClick={this.clickHanlder.bind(this)} className =   { `${Testimonial['symbol']} ${Testimonial['likes']}`}  >
+        </button>
         </span>
-        <small className= 'counter' > { this.state.update ?this.state.count :this.props.release? 0: this.state.count}</small>
+        <small > { this.state.update ?this.state.count :this.props.release? 0: this.state.count}</small>
       </span>
     );
   }
