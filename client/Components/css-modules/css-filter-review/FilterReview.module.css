@@ -1,0 +1,123 @@
+.filter-selection {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-content: space-around;
+  border-bottom-style: dotted;
+  border-color : silver;
+}
+
+.segment {
+  height: 100%;
+  width: 100%;
+}
+
+.write-review {
+  height:30px;
+  background-color: red;
+  color:white;
+  border-radius: 5px 5px 5px 5px;
+  font-weight: bold
+}
+
+.filter-selection-option-list {
+  display: flex ;
+  flex-direction: row;
+  height: 20%;
+  font-size: xx-small;
+}
+
+.filter-selection-option {
+  display: block;
+  height: 10%;
+  width:50%;
+  border-color:yellow;
+}
+.filter-selection-option-font {
+ font-size: xx-small;
+}
+
+.shift {
+  margin-left:70%;
+  font-size: xx-small;
+}
+
+.sort-button {
+border-radius: 5px;
+font-size: xx-small;
+}
+
+.small {
+  font-size: 9px;
+}
+
+.medium {
+  font-size: x-small;
+}
+.modal {
+  display: flex;
+  flex-direction: column;
+  margin : 0 auto;
+  position: absolute;
+  margin-top:5%;
+  z-index: 1;
+  left:0;
+  top:0;
+  right:0;
+  width :50%;
+  /* height: 50%; */
+  overflow:auto;
+  background-color: rgba(175, 161, 161, 1);
+  border-color: black;
+  border-width: thin;
+  border-style: dotted;
+  animation: showModal;
+  animation-duration: .5s;
+}
+.modal-className {
+  display:block;
+  height: 50px;
+  background-color: rgb(135, 2, 9);
+  font-size: medium;
+  color:white;
+  padding: top 40%;
+  border-style: ridge;
+  text-align: center;
+}
+
+@keyframes showModal {
+  from {top:-300; opacity: 0; margin-top:0% }
+  to {top:0; opacity:1 ; margin-top:5%}
+}
+
+.terminate-modal {
+  animation: clearModal;
+  animation-duration: 3s;
+  border-style: groove;
+  border-color: blueviolet
+}
+
+@keyframes clearModal {
+  from {top:0; opacity: 1; margin-top:5% }
+  to {top:-300; opacity:0 ; margin-top:100%}
+}
+
+.submit-review-button {
+  background-color: rgb(4, 250, 16);
+  color:rgb(5, 5, 5);
+
+}
+
+.release-review-button {
+  background-color: rgb(250, 4, 238);
+  color:rgb(5, 5, 5);
+}
+.user-review-message-block {
+  -webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+  font-size: 16px;
+	width: 100%;
+  width: 400px;
+  height: 200px;
+}

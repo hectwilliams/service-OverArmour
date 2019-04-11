@@ -1,5 +1,6 @@
 import React from 'react';
 import Modal from './modal-gen';
+import FilterOptionCss from '../css-modules/css-filter-review/FilterReview.module.css';
 
 class ReviewButton extends React.Component {
   constructor(props) {
@@ -23,8 +24,8 @@ class ReviewButton extends React.Component {
 
   render() {
     return (
-      <div className="segment">
-        <button onClick= {this.clickMe.bind(this)} className="write-review">  WRITE A REVIEW > </button>
+      <div className={FilterOptionCss["segment"]}>
+        <button onClick= {this.clickMe.bind(this)} className={FilterOptionCss["write-review"]} >  WRITE A REVIEW > </button>
         {!this.state.modalEnabled ? '' :
           <Modal
             releaseModal = {this.releaseModal.bind(this)}

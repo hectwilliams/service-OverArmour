@@ -80,10 +80,9 @@ class Main extends React.Component {
   }
 
   addTestimonial (obj) {
-    console.log('ADD TEST ')
     addReviewToDatabase(obj, (err)=>{
       if (err) {
-        console.log('eerrr')
+        console.log('err')
       } else {
         this.setState({
           dbData: [obj].concat(this.state.dbData), rating: obj.stars, release: true});

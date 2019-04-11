@@ -3,7 +3,8 @@ import ReviewSummary from '../shared/review-summary';
 import StarsEntry from '../shared/stars-entry';
 import DisLikes from './dislikes';
 import Likes from './likes';
-
+import Testimonial from '../css-modules/css-testimonial/Testimonial.module.css';
+import ProductReviewSummary from '../css-modules/css-product-reviews-summary/ProductReviewSummary.module.css';
 class UserData extends React.Component {
   constructor(props) {
     super(props);
@@ -14,9 +15,9 @@ class UserData extends React.Component {
 
   render() {
     return (
-      <div className="testimonial-user-data">
-        <div className="testimonial-user-data-sel">
-          <div className="testimonial-user-stats">
+      <div className={Testimonial["testimonial-user-data"]}>
+        <div className={Testimonial["testimonial-user-data-sel"]}>
+          <div className={Testimonial["testimonial-user-stats"]}>
             <ReviewSummary
               sizeRate = {this.props.info.sizeRating}
               comfortRate = {this.props.info.comfortRating}
@@ -25,33 +26,33 @@ class UserData extends React.Component {
             />
           </div>
 
-          <div className="stars">
+          <div className={ProductReviewSummary["stars"]}>
             <StarsEntry
               stars = {this.props.info.stars}
               subject = {this.props.info.subject}
               release = {this.props.release}
             />
           </div>
+          <div className=   { `${Testimonial['testimonial-message ']} ${Testimonial['testimonial-background']}`}    >  {this.props.info.review}</div>
 
-          <div className='testimonial-message testimonial-background '>  {this.props.info.review}</div>
           <div>
-            <span className='testimonial-pic'>
-              <img className='symbol' src={ this.props.static[3] } ></img>
+            <span className={Testimonial['testimonial-pic']}>
+              <img className = {Testimonial['symbol']} src={ this.props.static[3] } ></img>
             </span>
 
-            <span className='testimonial-pic'>
-              <img className='symbol' src={this.props.static[3]} ></img>
+            <span className={Testimonial['testimonial-pic']}>
+            <img className = {Testimonial['symbol']} src={ this.props.static[3] } ></img>
             </span>
           </div>
 
-          <div className='testimonial-message'>  Was this helpful?
+          <div className = {Testimonial['testimonial-message']}>  Was this helpful?
 
             <Likes
               user = {this.props.info.user}
               currCount = {this.props.info.likes}
               id = {this.props.pid}
               release = {this.props.release}
-
+              static = {this.props.static}
             />
 
             <DisLikes
@@ -59,23 +60,24 @@ class UserData extends React.Component {
               currCount ={this.props.info.dislikes}
               id = {this.props.pid}
               release = {this.props.release}
+              static = {this.props.static}
 
             />
 
           </div>
 
-          <div className='testimonial-response-fixed '>
-            <img className='symbol' src={this.props.static[0]} alt=''></img>
+          <div className={Testimonial['testimonial-response-fixed ']}>
+            <img className={Testimonial['symbol']} src={this.props.static[0]} alt=''></img>
             <span>Response from Under Armour</span>
           </div>
         </div>
 
 
-        <div className='testimonial-response-subject '>
-          <span> <strong>  UAExpert , UACustomerService </strong></span>
-          <span className='small'> {this.props.info.responseDate.slice(0, 10)} </span>
+        <div className={Testimonial['testimonial-response-subject ']}>
+          <span className={Testimonial['small']} > <strong >  UAExpert , UACustomerService </strong></span>
+          <span className={Testimonial['small']}> {this.props.info.responseDate.slice(0, 10)} </span>
           {!this.props.info.response ? ''
-            : <span className='testimonial-message'> {this.props.info.response}</span>
+            : <span className={Testimonial['testimonial-message']}> {this.props.info.response}</span>
           }
         </div>
       </div>
