@@ -5,7 +5,7 @@ import Testimonial from '../css-modules/css-testimonial/Testimonial.module.css'
 var updatelikeCount = function(user, data, id, callback) {
   $.ajax({
     method: 'PUT',
-    url: '/likes',
+    url: 'http:/localhost:3005/' +'likes',
     type: 'json',
     data: {user: user, data: data, id: id},
     success: ()=> {

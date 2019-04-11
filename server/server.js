@@ -6,7 +6,7 @@ var bodyParser = require('body-parser');
 var app = express();
 var path = require('path');
 var faker = require('faker');
-const uri = '';
+const uri = ''
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
