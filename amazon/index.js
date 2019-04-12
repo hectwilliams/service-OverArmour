@@ -2,44 +2,28 @@
 const aws = require('aws-sdk');
 const s3 = new aws.S3(); /*s3 service object */
 const bucketName = 'fec-underamour-media';
-const parse = require('./parser');
-
-
-var test = (callback)=> {
-  var param = {
-    Bucket: bucketName,
-    StartAfter: 'media/images',
-    EncodingType: 'url',
-  };
-
-  s3.listObjectsV2(param, (err, data)=> {
-    if (err) {
-      callback(true);
-    } else {
-      callback(null, parse.fetchImages(data));
-    }
-  });
-};
-
+const host = 'https://s3-us-west-1.amazonaws.com/';
+const dirPrefix = 'fec-underamour-media/media/';
 
 var fetchStatic = (callback)=> {
-  var param = {
-    Bucket: bucketName,
-    StartAfter: 'media/static',
-    EncodingType: 'url',
-  };
+  imageList = [];
+  // fixed items
+  fetchS3Image(imageList, 'static/', 3, 'png');
+  fetchS3Image(imageList, 'images/', 9, 'jpg');
+  if(imageList.length === 0 ) { //something is wrong
+    callback(true);
+  } else {
+    callback(null, imageList);
+  }
+};
 
-  s3.listObjectsV2(param, (err, data)=> {
-    if (err) {
-      callback(true);
-    } else {
-      callback(null, parse.fetchImages(data));
-    }
-  });
+var fetchS3Image = (array, dir, count, ext) => {   // --> mutate array
+  for ( var i = 0; i < count; i++) {
+    array.push (`${host}${dirPrefix}${dir}${i}.${ext}`);
+  }
 };
 
 exports.accessHelpers = {
-  test,
   fetchStatic
-};
+}
 

@@ -54,7 +54,8 @@ class Main extends React.Component {
           dbavgStats: serviceData[0],
           dbStatic: serviceData[1],
           ready: true,
-          id: endpoint
+          id: endpoint,
+          release: true
         });
       },
       error: ()=> {
@@ -73,7 +74,9 @@ class Main extends React.Component {
           dbavgStats: serviceData[0],
           dbStatic: serviceData[1],
           ready: true,
-          id: endpoint
+          id: endpoint,
+          release: true
+
         });
       },
     });
@@ -85,7 +88,10 @@ class Main extends React.Component {
         console.log('err')
       } else {
         this.setState({
-          dbData: [obj].concat(this.state.dbData), rating: obj.stars, release: true});
+          dbData: [obj].concat(this.state.dbData),
+           rating: obj.stars,
+           release: true
+          });
       }
     });
   }

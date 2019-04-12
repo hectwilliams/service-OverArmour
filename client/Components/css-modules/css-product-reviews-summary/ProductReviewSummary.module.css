@@ -96,7 +96,6 @@
   height: fit-content;
   margin-left:93% ;
   position: inherit;
-  /* box-sizing: border-box */
 }
 
 
@@ -144,8 +143,6 @@
 
 .wrapper {
   position: relative;
-  /* border-color: aqua; */
-  /* border-style: ridge; */
   padding-left: 10px;
 }
 

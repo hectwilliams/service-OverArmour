@@ -21,13 +21,6 @@ app.use((req, res, next)=>{
 
 
 app.put(`${uri}/add-review`, (req, res)=> {
-  console.log('vcv')
-  // var re = /pid.+-[0-9]{3}?/;
-  // tableName = ((req.path)).match(re);
-  // if (tableName[0]) {
-  //   tableName = tableName[0];
-  // }
-
   db.accessHelpers.writeOnceToCollection(req.body, (err, db )=> {
     if (err) {
       res.status(200);
@@ -35,7 +28,7 @@ app.put(`${uri}/add-review`, (req, res)=> {
       res.status(200);
     }
     res.end();
-    db.close();
+    // db.close();
   });
 });
 
@@ -49,7 +42,7 @@ app.put(`${uri}/likes`, (req, res)=> {
       res.status(200);
     }
     res.end();
-    db.close();
+    // db.close();
   });
 });
 
@@ -62,11 +55,11 @@ app.put(`${uri}/dislikes`, (req, res)=> {
       res.status(200);
     }
     res.end();
-    db.close();
+    // db.close();
   });
 });
 
-// db.accessHelpers.clearDatabase(); // --> DEBUG ONLY :);
+db.accessHelpers.clearDatabase(); // --> DEBUG ONLY :);
 
 app.get( `${uri}/aws`, (req, res )=> {
   s3.accessHelpers.test((data)=> {
@@ -114,14 +107,6 @@ app.get( [`${uri}/init`, `${uri}/reviews/:id` ], (req, res)=> {
 app.use(`${uri}/:id`, (req,res,next)=> {
   var getPath =  path.join ( __dirname, '..', 'public', 'index.html') ;
   res.sendFile( getPath);
-
-
-
-
-
-
-
-
 });
 
 

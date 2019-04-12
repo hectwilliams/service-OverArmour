@@ -25,7 +25,7 @@ var genTestimonials = function(count, pid) {
     obj.comfortRating = faker.random.number({min: 0, max: 7});
     obj.sizeRating = faker.random.number({min: 0, max: 7});
     obj.stars = faker.random.number({min: 0, max: 5});
-    obj.subject = faker.lorem.sentences(4);
+    obj.subject = faker.lorem.words({num: 4})
     obj.review = faker.lorem.sentences(4);
     obj.picture = faker.image.sports(1, 100);
     obj.likes = [faker.random.number(100), faker.random.number(100)];
@@ -42,12 +42,12 @@ var genTestimonials = function(count, pid) {
 };
 
 var generateTable = function(callback) {
-  const shoeCount = 100;
+  const shoeCount = 100;  //max number of review pages
   var testimonial;
   var rand;
 
   for(var i = 0; i <= shoeCount; i++) {
-    rand = faker.random.number({min: 5, max: 7});
+    rand = faker.random.number({min: 5, max: 25});
     testimonial = genTestimonials(rand, i);
     db.accessHelpers.writeCollection_Array(testimonial, i , (err, msg, db)=> {
       if (err) {
@@ -59,7 +59,16 @@ var generateTable = function(callback) {
 };
 
 var run = function() {
-  generateTable();
+  var close = () => {
+    console.log('databased seeded!');
+    // process.stdout.write('\x1Bc');
+    console.log('Sorry for the logs, I will patch soon :)');
+    process.exit();
+
+  }
+  console.log('Starting to seed');
+  setTimeout(generateTable, 200);
+  setTimeout( close , 5000);
   console.log('databased seeded!');
 };
 

@@ -14,25 +14,25 @@ var getDate = () => {
 };
 /* Prototypal Class  --> REVIEW*/
 var reviewer = function() {
-  this.gender = 'null';
-  this.user = 'null';
+  this.gender = '';
+  this.user = '';
   this.date = getDate();
-  this.sizePurchased = 'null';
-  this.performanceRating = 'null';
-  this.comfortRating = 'null';
+  this.sizePurchased = '';
+  this.performanceRating = '';
+  this.comfortRating = '';
   this.stars = 0;
   this.dislikes = 0;
   this.likes = 0;
   this.response = '';
   this.subject = '';
   this.review = '';
-  this.picture = 'null';
+  this.picture = '';
   this.responseDate = '';
-  this.sportsInterest = 'null';
-  this.athleteType = 'null';
-  this.height = 'null';
-  this.logoA = 'null';
-  this.logoB = 'null';
+  this.sportsInterest = '';
+  this.athleteType = '';
+  this.height = '';
+  this.logoA = '';
+  this.logoB = '';
   this.timestamp = Date.now();
   this.pid = HectronPluck(window.location.href) =='init' ? 0 : HectronPluck(window.location.href) ;
 
@@ -87,9 +87,9 @@ class Form extends React.Component {
     Array.prototype.forEach.call(children, (ele, index, array)=> {
       if (ele.checked) {
         messenger[ele.name] = ele.value;
-      } else if (ele.className === 'user-review-message-block') {
+      } else if (ele.name ===  'review') {
         messenger.review = ele.value;
-      } else if (ele.className === 'subject-box') {
+      } else if (ele.name === 'subject') {
         messenger.subject = ele.value;
       } else if (ele.className === 'username') {
         messenger.user = ele.value;
@@ -161,7 +161,7 @@ class Form extends React.Component {
         <br></br>
 
         <strong>Subject</strong><br></br>
-        <input className='subject-box' type='text' name='subject' min='0' max='100'></input>
+        <input  type='text' name='subject' min='0' max='100'></input>
         <br></br>
 
         <textarea onChange={this.changedTextHandler.bind(this)} name='review' className= {FilterOptionCss['user-review-message-block']} value = {this.state.text}> </textarea> <br></br>

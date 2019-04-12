@@ -16,10 +16,10 @@
   "scripts": {
     "linter": "eslint --ext .jsx,.js  ./database ./amazon ./client ./server ",
     "test": "jest --watchAll --coverage",
-    "server-dev": "nodemon ./server/server.js",
+    "server-dev": "nodemon --no-warnings ./server/server.js",
     "react-dev": "webpack -d --watch",
     "es-dev": "eslint ./database",
-    "seed": "node ./database/seedData.js"
+    "seed": "node --no-warnings ./database/seedData.js"
   },
   "dependencies": {
     "@babel/core": "7.4.0",
@@ -39,6 +39,7 @@
     "react": "16.8.6",
     "react-dom": "16.8.6",
     "request": "2.88.0",
+    "s3": "^4.4.0",
     "style-loader": "^0.23.1",
     "webpack": "4.29.6",
     "webpack-cli": "3.3.0"

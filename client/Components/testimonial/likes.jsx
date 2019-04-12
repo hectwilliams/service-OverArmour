@@ -48,7 +48,7 @@ class Likes extends React.Component {
         <button onClick={this.clickHanlder.bind(this)} className =   { `${Testimonial['symbol']} ${Testimonial['likes']}`}  >
         </button>
         </span>
-        <small > { this.state.update ?this.state.count :this.props.release? 0: this.state.count}</small>
+        <small className= 'counter' >{!this.props.currCount ? 0: this.state.count}</small>
       </span>
     );
   }

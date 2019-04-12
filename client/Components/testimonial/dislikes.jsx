@@ -47,10 +47,11 @@ class DisLikes extends React.Component {
     return (
       <span>
         <span className={Testimonial['likes-entry']}>
-        <button onClick={this.clickHanlder.bind(this)} className ={ `${Testimonial['symbol']} ${Testimonial['dislikes']}`}>
+        <button onClick={this.clickHanlder.bind(this)} className ={ `${Testimonial['symbol']} ${Testimonial['dislikes']}`}   >
           </button>
         </span>
-        <small className= 'counter' > { this.state.update ?this.state.count :this.props.release? 0: this.state.count}</small>
+        <small className= 'counter' >{!this.props.currCount ? 0: this.state.count}</small>
+
       </span>
     );
   }
