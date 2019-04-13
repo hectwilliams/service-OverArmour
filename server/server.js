@@ -20,44 +20,41 @@ app.use(cors());
 
 
 app.put(`${uri}/add-review`, (req, res)=> {
-  db.accessHelpers.writeOnceToCollection(req.body, (err, db )=> {
+  db.accessHelpers.writeOnceToCollection(req.body, (err )=> {
     if (err) {
       res.status(200);
     } else {
       res.status(200);
     }
     res.end();
-    db.close();
   });
 });
 
 
 
 app.put(`${uri}/likes`, (req, res)=> {
-  db.accessHelpers.updateCollection({user: req.body.user,id: req.body.id}, {likes: req.body.data}, (err, db)=> {
+  db.accessHelpers.updateCollection({user: req.body.user,id: req.body.id}, {likes: req.body.data}, (err)=> {
     if (err) {
       res.status(404);
     } else {
       res.status(200);
     }
     res.end();
-    db.close();
   });
 });
 
 app.put(`${uri}/dislikes`, (req, res)=> {
   res.status(200).end()
-  db.accessHelpers.updateCollection({user: req.body.user, id: req.body.id}, {dislikes: req.body.data}, (err, db)=> {
+  db.accessHelpers.updateCollection({user: req.body.user, id: req.body.id}, {dislikes: req.body.data}, (err)=> {
     if (err) {
       res.status(404);
     } else {
       res.status(200);
     }
     res.end();
-    db.close();
   });
 });
-
+//
 // db.accessHelpers.clearDatabase(); // --> DEBUG ONLY :);
 
 app.get( `${uri}/aws`, (req, res )=> {
