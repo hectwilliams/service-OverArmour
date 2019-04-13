@@ -1,39 +1,15 @@
-# Project Name
+# Hector's Serice
 
-> Project description
 
-## Related Projects
+Build Setup:
+run the following in this directory(i.e. root directory)
+1) npm install
+2) npm run server-dev
+3) npm run react-dev
+4) npm seed
 
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
+View Application:
+Open browser to host:  http://localhost:3005
 
-## Table of Contents
-
-1. [Usage](#Usage)
-1. [Requirements](#requirements)
-1. [Development](#development)
-
-## Usage
-
-> Some usage instructions
-
-## Requirements
-
-An `nvmrc` file is included if using [nvm](https://github.com/creationix/nvm).
-
-- Node 6.13.0
-- etc
-
-## Development
-
-### Installing Dependencies
-
-From within the root directory:
-
-```sh
-npm install -g webpack
-npm install
 ```
 
