@@ -47,7 +47,7 @@ var generateTable = function(callback) {
   var rand;
 
   for(var i = 0; i <= shoeCount; i++) {
-    rand = faker.random.number({min: 5, max: 25});
+    rand = faker.random.number({min: 5, max: 7});
     testimonial = genTestimonials(rand, i);
     db.accessHelpers.writeCollection_Array(testimonial, i , (err, msg, db)=> {
       if (err) {

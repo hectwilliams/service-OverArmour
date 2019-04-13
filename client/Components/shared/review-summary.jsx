@@ -11,7 +11,10 @@ class ReviewSummary extends React.Component {
     return (
       <div className={ProductReviewSummary["col-2-review-summary"]}>
         {
-          (this.props.sizeRate > 0 || this.props.comfortRate > 0 || this.props.performRate > 0) ? <label> Rating Summary: </label> : ''}
+          ( this.props.labelOff ?''
+            : this.props.sizeRate > 0 || this.props.comfortRate > 0 || this.props.performRate > 0) ? <label> Rating Summary
+              : </label>
+          : ''}
 
         <div className= {ProductReviewSummary["col-2-review-bars"]}>
 
