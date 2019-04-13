@@ -5,7 +5,6 @@ var tableName = 'reviews';
 
 var options = {
   useNewUrlParser: true,
-  recordQueryStats: true
 };
 
 const unique = {
@@ -27,7 +26,6 @@ var clearDatabase = function(callback) {
 
 var readCollection = (id, callback)=> {
   var query = [ {pid: {$eq: parseInt(id)}}, {pid: {$eq: String(id)}} ];
-  const sortby = {timestamp: -1};
   client.connect((err, db)=> {
     const collection = db.db(dbName).collection(tableName);
     collection.find( {$or: query}).toArray((err, dbDocs)=> {
@@ -45,16 +43,7 @@ var readCollection = (id, callback)=> {
 var writeCollection_Array = (arrayOfObjects, id, callback)=> {
   client.connect(function(err, db) {
     const collection = db.db(dbName).collection(tableName);
-    collection.createIndex(unique, {unique: true});
-    collection.insertMany( arrayOfObjects, (err, report)=> {
-      if (err) {
-        /* errror */
-        console.log('error')
-      } else if (callback) {
-        callback(err, report, client);
-      }
-
-    });
+    collection.insertMany(arrayOfObjects);
   });
 };
 var writeOnceToCollection = (obj, callback)=> {
@@ -80,7 +69,7 @@ var sortCollection = (list)=> {
 
 var avgStatsCollection = (list) => {
   var avg = {
-    siz: 0,
+    size: 0,
     performance: 0,
     comfort: 0,
     stars: 0,
@@ -93,7 +82,8 @@ var avgStatsCollection = (list) => {
     }
   };
 
-  var length = list.length;
+  var outcomes = 0;
+  var maxFound  = [0, 0]
 
   for (var obj of list ) {
     avg.size += !parseFloat (obj.sizePurchased) ? 0 : parseFloat(obj.sizePurchased);
@@ -101,19 +91,23 @@ var avgStatsCollection = (list) => {
     avg.comfort += !parseFloat (obj.comfortRating) ? 0 : parseFloat (obj.comfortRating);
     if (!((obj.stars) === NaN) && (obj.stars)) {
       avg.histoStars[obj.stars] += +( parseInt(obj.stars) !== 0);
+      outcomes++;
     }
   }
 
-  avg.size = avg.size / length;
-  avg.performance = avg.performance / length;
-  avg.comfort = avg.comfort / length;
+  avg.size = avg.size / list.length;
+  avg.performance = avg.performance / list.length;;
+  avg.comfort = avg.comfort /  list.length;;
 
   for (var key in avg.histoStars ) {
-    avg.stars += avg.histoStars[key];
-    avg.histoStars[key] += Math.round (avg.histoStars[key] / length);
-  }
+    avg.histoStars[key] = Math.round( (avg.histoStars[key]/outcomes)*100 ) ;
 
-  avg.stars = this.stars > 5 ? 5 : this.stars; //Ceiling rating to always have a star on the page :)
+    if (avg.histoStars[key]  >  maxFound[1]) {
+      maxFound = [key, avg.histoStars[key]];
+    }
+
+    avg.stars = maxFound[0]; // update with largest average
+  }
   return avg;
 };
 
@@ -124,9 +118,9 @@ var updateCollection = (query, data, callback)=> {
   client.connect ((err, db)=>{
     db.db(dbName).collection(tableName).update(query, set, (err)=> {
       if (err) {
-        callback(true, client);
+        callback(true);
       } else {
-        callback(null, client);
+        callback(null);
       }
     });
   });

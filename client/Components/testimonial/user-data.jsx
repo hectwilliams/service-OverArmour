@@ -33,15 +33,14 @@ class UserData extends React.Component {
               release = {this.props.release}
             />
           </div>
-          <div className=   { `${Testimonial['testimonial-message ']} ${Testimonial['testimonial-background']}`}    >  {this.props.info.review}</div>
+          <div className={ `${Testimonial['testimonial-message']} ${Testimonial['testimonial-background']}`}    >  {this.props.info.review}</div>
 
           <div>
             <span className={Testimonial['testimonial-pic']}>
-              <img className = {Testimonial['symbol']} src={ this.props.static[3] } ></img>
+            <img className = {Testimonial['shoe-symbol']} src={ this.props.static[randRange()]} ></img>
             </span>
-
             <span className={Testimonial['testimonial-pic']}>
-            <img className = {Testimonial['symbol']} src={ this.props.static[3] } ></img>
+            <img className = {Testimonial['shoe-symbol']} src={ this.props.static[randRange()]} ></img>
             </span>
           </div>
 
@@ -68,22 +67,39 @@ class UserData extends React.Component {
 
           <div className={Testimonial['testimonial-response-fixed ']}>
             <img className={Testimonial['symbol']} src={this.props.static[0]} alt=''></img>
-            <span>Response from Under Armour</span>
+            <span className={Testimonial['small']}  >Response from Under Armour</span>
           </div>
         </div>
 
 
         <div className={Testimonial['testimonial-response-subject ']}>
-          <span className={Testimonial['small']} > <strong >  UAExpert , UACustomerService </strong></span>
-          <span className={Testimonial['small']}> {this.props.info.responseDate.slice(0, 10)} </span>
           {!this.props.info.response ? ''
-            : <span className={Testimonial['testimonial-message']}> {this.props.info.response}</span>
+            :
+            <div>
+            <span className={Testimonial['small']} > <strong >  UAExpert , UACustomerService </strong></span>
+            <span className={Testimonial['small']}> {this.props.info.responseDate.slice(0, 10)} </span>
+            <span className={Testimonial['testimonial-message']}>
+             <p> { this.props.info.response}  </p>
+           </span>
+
+
+            </div>
+
           }
         </div>
       </div>
     );
   }
 }
+
+
+
+var randRange = () => {
+  var min = 3;
+  var max = 11;
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+
+};
 
 
 export default UserData;

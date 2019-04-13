@@ -8,7 +8,11 @@ var AvgRating = (props) => (
   <div className={ProductReviewSummary["col-1-review-summary"]}>
     <label>Average Rating:</label>
     <div className={FilterSummary['medium']}>
-      <Stars stars = {Math.round(props.stars)}/>
+      <Stars
+      release = {true}
+      fetch = {()=>{}}
+      reset = {()=>{}}
+      stars = {Math.round(props.stars)}/>
     </div>
     <div className={FilterSummary['medium']}> { props.stars !== undefined ? Math.round(props.stars) : 0} out of 5</div>
   </div>
