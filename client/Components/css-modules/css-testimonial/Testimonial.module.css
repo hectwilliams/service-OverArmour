@@ -97,14 +97,14 @@
 }
 
 .likes {
-  background-image: url('https://s3-us-west-1.amazonaws.com/fec-underamour-media/media/static/thumpsDown.jpg');
+  background-image: url('https://s3-us-west-1.amazonaws.com/fec-underamour-media/media/static/1.png');
   background-size: contain;
   border-style: ridge;
 
 }
 
 .dislikes {
-  background-image: url('https://s3-us-west-1.amazonaws.com/fec-underamour-media/media/static/thumpsDown.jpg');
+  background-image: url('https://s3-us-west-1.amazonaws.com/fec-underamour-media/media/static/2.png');
   background-size: contain;
   transform: rotate(180deg);
 }

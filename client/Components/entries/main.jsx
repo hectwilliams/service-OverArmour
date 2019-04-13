@@ -6,7 +6,7 @@ var addReviewToDatabase = function(data, callback) {
   console.log(data)
   $ .ajax({
     method: 'PUT',
-    url: 'add-review',
+    url: 'http://localhost:3005/' +   'add-review',
     type: 'json',
     data: data,
     success: ()=> {
@@ -18,8 +18,7 @@ var addReviewToDatabase = function(data, callback) {
   });
 };
 
-
-class Main extends React.Component {
+class ShoeReview extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -46,7 +45,7 @@ class Main extends React.Component {
   requestOrigin(endpoint) {
     $.ajax({
       method: 'get',
-      url: endpoint ,
+      url: 'http://localhost:3005/' +   endpoint ,
       success: (serviceData)=> {
         console.log(serviceData);
         this.setState({
@@ -66,7 +65,7 @@ class Main extends React.Component {
   requestNonOrigin(endpoint) {
     $.ajax({
       method: 'get',
-      url: 'reviews' + '/' + endpoint,
+      url: 'http://localhost:3005/' +   'reviews' + '/' + endpoint,
       success: (serviceData)=> {
         console.log(serviceData);
         this.setState({
@@ -114,7 +113,6 @@ class Main extends React.Component {
     )
   }
 }
-export default Main;
 
 var HectronPluck = (url) => {
   var idx = url.lastIndexOf('/')+1;
@@ -124,3 +122,5 @@ var HectronPluck = (url) => {
   }
   return 'init';
 };
+
+export default ShoeReview;

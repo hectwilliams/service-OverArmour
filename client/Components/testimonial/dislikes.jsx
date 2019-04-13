@@ -5,7 +5,7 @@ import Testimonial from '../css-modules/css-testimonial/Testimonial.module.css'
 var updateDislikeCount = function(user, data, id, callback) {
   $.ajax({
     method: 'PUT',
-    url: 'dislikes',
+    url: 'http://localhost:3005/' +'dislikes',
     type: 'json',
     data: {user: user, data: data, id: id},
     success: ()=> {
@@ -47,15 +47,13 @@ class DisLikes extends React.Component {
     return (
       <span>
         <span className={Testimonial['likes-entry']}>
-        <button onClick={this.clickHanlder.bind(this)} className ={ `${Testimonial['symbol']} ${Testimonial['dislikes']}`}   >
+        <button onClick={this.clickHanlder.bind(this)} className ={ `${Testimonial['symbol']} ${Testimonial['dislikes']}`}>
           </button>
         </span>
-        <small className= 'counter' >{!this.props.currCount ? 0: this.state.count}</small>
-
+        <small className= 'counter' > { this.state.update ?this.state.count :this.props.release? 0: this.state.count}</small>
       </span>
     );
   }
 }
 export default DisLikes;
-
 

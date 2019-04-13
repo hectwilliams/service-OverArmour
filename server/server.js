@@ -47,7 +47,7 @@ app.put(`${uri}/likes`, (req, res)=> {
 });
 
 app.put(`${uri}/dislikes`, (req, res)=> {
-  res.status(200).end()
+  console.log('shshh')
   db.accessHelpers.updateCollection({user: req.body.user, id: req.body.id}, {dislikes: req.body.data}, (err, db)=> {
     if (err) {
       res.status(404);
@@ -59,7 +59,7 @@ app.put(`${uri}/dislikes`, (req, res)=> {
   });
 });
 
-db.accessHelpers.clearDatabase(); // --> DEBUG ONLY :);
+// db.accessHelpers.clearDatabase(); // --> DEBUG ONLY :);
 
 app.get( `${uri}/aws`, (req, res )=> {
   s3.accessHelpers.test((data)=> {
@@ -117,6 +117,3 @@ app.use(`${uri}/:id`, (req,res,next)=> {
 app.listen(3005, ()=>{
   console.log('listening on port 3005');
 });
-
-
-
