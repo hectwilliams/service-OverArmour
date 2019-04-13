@@ -1,8 +1,7 @@
 import React from 'react';
-import ProductReviewSummaryEntry from './entries/product-review-entry';
-import FilterReviewEntry from './entries/filter-review-entry';
-import TestimonialEntry from './entries/testimonial-entry';
-import $ from 'jquery';
+import ProductReviewSummaryEntry from './product-review-entry';
+import FilterReviewEntry from './filter-review-entry';
+import TestimonialEntry from './testimonial-entry';
 
 
 
