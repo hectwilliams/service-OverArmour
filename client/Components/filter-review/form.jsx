@@ -1,5 +1,6 @@
 import React from 'react';
 import StarsEntry from '../shared/stars-entry';
+import FilterOptionCss from '../css-modules/css-filter-review/FilterReview.module.css';
 
 var getDate = () => {
   var sizeCheck = (x) => {
@@ -163,10 +164,10 @@ class Form extends React.Component {
         <input className='subject-box' type='text' name='subject' min='0' max='100'></input>
         <br></br>
 
-        <textarea onChange={this.changedTextHandler.bind(this)} name='review' className='user-review-message-block' value = {this.state.text}> </textarea> <br></br>
+        <textarea onChange={this.changedTextHandler.bind(this)} name='review' className= {FilterOptionCss['user-review-message-block']} value = {this.state.text}> </textarea> <br></br>
 
-        <input onClick={this.submitHandler.bind(this)} className='submit-review-button' type={'submit'} value={'Post'}></input>
-        <input onClick={this.props.releaseModal} className='release-review-button' type={'submit'} value={'Cancel'}></input>
+        <input onClick={this.submitHandler.bind(this)} className= {FilterOptionCss['submit-review-button']} type={'submit'} value={'Post'}></input>
+        <input onClick={this.props.releaseModal} className = {FilterOptionCss['release-review-button']} type={'submit'} value={'Cancel'}></input>
         <br></br>
       </form>
     );

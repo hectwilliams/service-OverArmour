@@ -7,18 +7,35 @@ module.exports = {
         test: /\.(js|jsx)$/,
         exclude: /(node_modules|hidden_misc)/,
         use : ['babel-loader']
-      }
+      },
+
+
+      {
+        test: /\.css$/,
+        use: [
+          {loader: "style-loader"},
+          {loader: "css-loader",
+            options: {
+              modules: true
+            }
+
+          }
+
+        ]
+      },
+
+
     ]
 
   },
 
   resolve : {
-    extensions : ['.js', '.jsx']
+    extensions : ['.js', '.jsx', '.css']
   },
 
   output: {
     path: __dirname + '/public',
-    filename : "bundle.js"
+    filename : "bundle-hector.js"
   }
 };
 

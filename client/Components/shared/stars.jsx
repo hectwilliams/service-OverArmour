@@ -5,6 +5,7 @@ import ThreeStar from './three-star';
 import FourStar from './four-stars';
 import FiveStar from './five-stars';
 import NullStars from './null-stars';
+import ProductReviewSummary from '../css-modules/css-product-reviews-summary/ProductReviewSummary.module.css'
 
 class Stars extends React.Component {
   constructor(props) {
@@ -17,7 +18,7 @@ class Stars extends React.Component {
 
   render () {
     return (
-      <div className='medium'>
+      <div className = {ProductReviewSummary['medium']}>
         {
           this.props.stars == 1 && this.props.release ?
             <OneStar subject ={this.props.subject}/>
