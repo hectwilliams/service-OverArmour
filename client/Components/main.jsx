@@ -1,6 +1,6 @@
 import React from 'react';
 import $ from 'jquery';
-import App from '../app';
+import App from '../Components/entries/app';
 
 var addReviewToDatabase = function(data, callback) {
   console.log(data)

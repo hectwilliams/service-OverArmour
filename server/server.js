@@ -6,28 +6,20 @@ var bodyParser = require('body-parser');
 var app = express();
 var path = require('path');
 var faker = require('faker');
+var cors = require('cors');
 const uri = ''
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.static('./public'));
-app.use((req, res, next)=>{
-  res.header('Access-Control-Allow-Origin', '*');
-  next();
-});
+app.use(cors());
+
 
 
 
 
 
 app.put(`${uri}/add-review`, (req, res)=> {
-  console.log('vcv')
-  // var re = /pid.+-[0-9]{3}?/;
-  // tableName = ((req.path)).match(re);
-  // if (tableName[0]) {
-  //   tableName = tableName[0];
-  // }
-
   db.accessHelpers.writeOnceToCollection(req.body, (err, db )=> {
     if (err) {
       res.status(200);
