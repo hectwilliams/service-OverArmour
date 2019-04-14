@@ -2,11 +2,13 @@ import React from 'react';
 import $ from 'jquery';
 import App from '../Components/entries/app';
 
+const origin = window.location.origin;
+
 var addReviewToDatabase = function(data, callback) {
   console.log(data)
   $ .ajax({
     method: 'PUT',
-    url: 'http://localhost:3005/' + 'add-review',
+    url: origin + '/' + 'add-review',
     type: 'json',
     data: data,
     success: ()=> {
@@ -19,7 +21,6 @@ var addReviewToDatabase = function(data, callback) {
 };
 
 class ShoeReview extends React.Component{
-// class Main extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -35,18 +36,17 @@ class ShoeReview extends React.Component{
   }
 
   componentDidMount () {
-    var endpoint = HectronPluck(window.location.href);
-    if(endpoint == 'init') {
-      this.requestOrigin(endpoint);
-    } else if (!isNaN(endpoint)) {
-      this.requestNonOrigin(endpoint);
+    var value = 'init';
+    if (Number.isInteger(window.location.pathname)){
+      this.request(  'reviews' + '/' + window.location.pathname )
     }
+    this.reqService(value);
   }
 
-  requestOrigin(endpoint) {
+  reqService(endpoint) {
     $.ajax({
       method: 'get',
-      url: 'http://localhost:3005/' +endpoint ,
+      url: origin + '/' +endpoint ,
       success: (serviceData)=> {
         console.log(serviceData);
         this.setState({
@@ -54,38 +54,20 @@ class ShoeReview extends React.Component{
           dbavgStats: serviceData[0],
           dbStatic: serviceData[1],
           ready: true,
-          id: endpoint
-        });
-      },
-      error: ()=> {
-      }
-    });
-  }
-
-  requestNonOrigin(endpoint) {
-    $.ajax({
-      method: 'get',
-      url: 'http://localhost:3005/' +'reviews' + '/' + endpoint,
-      success: (serviceData)=> {
-        console.log(serviceData);
-        this.setState({
-          dbData: serviceData.slice(2),
-          dbavgStats: serviceData[0],
-          dbStatic: serviceData[1],
-          ready: true,
-          id: endpoint
+          id: endpoint,
+          release: true
         });
       },
     });
   }
 
   addTestimonial (obj) {
+    this.setState({
+      dbData: [obj].concat(this.state.dbData), rating: obj.stars});
+
     addReviewToDatabase(obj, (err)=>{
       if (err) {
         console.log('err')
-      } else {
-        this.setState({
-          dbData: [obj].concat(this.state.dbData), rating: obj.stars, release: true});
       }
     });
   }
@@ -94,7 +76,6 @@ class ShoeReview extends React.Component{
     return (
       <div>
         {!this.state.ready ? 'please wait ...' :
-
           <App
             id =  {this.state.id}
             avgStats = {this.state.dbavgStats}
@@ -108,16 +89,4 @@ class ShoeReview extends React.Component{
     )
   }
 }
-// export default Main;
-
-var HectronPluck = (url) => {
-  var idx = url.lastIndexOf('/')+1;
-  var tail =  url.slice(idx) ;
-  if ( tail > 0 && tail <= 100) {
-    return tail ;
-  }
-  return 'init';
-};
-
-
 export default ShoeReview;

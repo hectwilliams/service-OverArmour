@@ -1,19 +1,25 @@
 const MongoClient = require('mongodb').MongoClient;
-const uri = 'mongodb://localhost:27017';
+const personal = require('../hidden_misc/config');
+
+// const uri = 'mongodb://localhost:27017';
+// mongodb+srv://hectwilliams:<password>@cluster0-e5veh.mongodb.net/test?retryWrites=true
+
+const uri = `mongodb+srv://hectwilliams:${personal.passwordMongodb}@cluster0-e5veh.mongodb.net/test?retryWrites=true`;
 const dbName = 'under-armour';
 var tableName = 'reviews';
 
-var options = {
-  useNewUrlParser: true,
-};
+// var options = {
+//   useNewUrlParser: true,
+// };
 
 const unique = {
   user: 1,
   pid: 1
 };
 
-var client = new MongoClient(uri, options);
+const client = new MongoClient(uri, { useNewUrlParser: true });
 var clearDatabase = function(callback) {
+
   client.connect((err, db)=> {
     db.db(dbName).collection(tableName).deleteMany( (err, resp)=> {
       if (callback) {
@@ -34,7 +40,7 @@ var readCollection = (id, callback)=> {
         callback(true);
       } else {
         console.log('read successful');
-        callback(err, dbDocs, client);
+        callback(err, dbDocs);
       }
     });
   });
@@ -53,9 +59,9 @@ var writeOnceToCollection = (obj, callback)=> {
     collection.insertOne( obj, (err)=> {
       if ( err ) {
         console.log(err)
-        callback(err, client);
+        callback(err);
       } else if (callback) {
-        callback(err, client);
+        callback(err);
       }
     });
   });
@@ -98,7 +104,7 @@ var avgStatsCollection = (list) => {
   avg.size = avg.size / list.length;
   avg.performance = avg.performance / list.length;;
   avg.comfort = avg.comfort /  list.length;;
-
+  console.log(avg)
   for (var key in avg.histoStars ) {
     avg.histoStars[key] = Math.round( (avg.histoStars[key]/outcomes)*100 ) ;
 

@@ -19,9 +19,9 @@ class ProductReviewSummaryEntry extends React.Component {
           starBreakdown = {this.props.avgStats.histoStars}
         />
         <ReviewSummary
-          comfortRate = {Math.floor(this.props.avgStats.size)}
-          performRate = {Math.floor( this.props.avgStats.performance)}
-          sizeRate = {Math.floor(this.props.avgStats.comfort)}
+          comfortRate = { parseInt( this.props.avgStats.comfort) }
+          performRate = {parseInt( this.props.avgStats.performance) }
+          sizeRate = { parseInt (this.props.avgStats.size) }
         />
       </div>
 

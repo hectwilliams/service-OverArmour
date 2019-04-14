@@ -5,7 +5,7 @@ var UserInfo = ({info}) => (
   <div className={Testimonial["testimonial-user-who"]}>
     <ul className={Testimonial["list"]}>
       <li>  <strong> Posted by: </strong>{info.user}</li>
-      <li>  <strong>  Date: </strong> {info.date.slice(0,10)}  </li>
+      <li>  <strong>  Date: </strong> { info.date.indexOf('T') !==-1 ? info.date.slice(0, info.date.indexOf('T')) : info.date}  </li>
       <li>  <strong> Gender: </strong>  {info.gender}  </li>
       <li>  <strong> Athlete Type:</strong>  {info.athleteType}   </li>
       <li>   <strong> Sport Interest:</strong>   {info.sportsInterest} </li>

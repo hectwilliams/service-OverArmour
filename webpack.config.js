@@ -3,11 +3,6 @@ module.exports = {
 
   module : {
     rules : [
-      {
-        test: /\.(js|jsx)$/,
-        exclude: /(node_modules|hidden_misc)/,
-        use : ['babel-loader']
-      },
 
 
       {
@@ -23,6 +18,13 @@ module.exports = {
 
         ]
       },
+
+      {
+        test: /\.(js|jsx)$/,
+        exclude: /(node_modules|hidden_misc)/,
+        use :  ['babel-loader']
+      },
+
 
 
     ]

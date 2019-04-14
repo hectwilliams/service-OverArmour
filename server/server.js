@@ -1,21 +1,17 @@
 var db = require('../database/index');
-var s3 = require('../amazon/index');
-var express = require('express');
-var amazon = require('../amazon/index');
-var bodyParser = require('body-parser');
-var app = express();
-var path = require('path');
-var faker = require('faker');
-var cors = require('cors');
+
+const express = require('express');
+const amazon = require('../amazon/index');
+const bodyParser = require('body-parser');
+const app = express();
+const path = require('path');
+const cors = require('cors');
 const uri = ''
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.static('./public'));
-app.use(cors());
-
-
-
+app.use( cors() );
 
 
 
@@ -30,8 +26,6 @@ app.put(`${uri}/add-review`, (req, res)=> {
   });
 });
 
-
-
 app.put(`${uri}/likes`, (req, res)=> {
   db.accessHelpers.updateCollection({user: req.body.user,id: req.body.id}, {likes: req.body.data}, (err)=> {
     if (err) {
@@ -44,7 +38,7 @@ app.put(`${uri}/likes`, (req, res)=> {
 });
 
 app.put(`${uri}/dislikes`, (req, res)=> {
-  res.status(200).end()
+  console.log(req.body)
   db.accessHelpers.updateCollection({user: req.body.user, id: req.body.id}, {dislikes: req.body.data}, (err)=> {
     if (err) {
       res.status(404);
@@ -54,15 +48,14 @@ app.put(`${uri}/dislikes`, (req, res)=> {
     res.end();
   });
 });
-//
+
 // db.accessHelpers.clearDatabase(); // --> DEBUG ONLY :);
 
-app.get( `${uri}/aws`, (req, res )=> {
-  s3.accessHelpers.test((data)=> {
-    res.send({message: data});
-  });
-});
-
+// app.get( `${uri}/aws`, (req, res )=> {
+//   s3.accessHelpers.test((data)=> {
+//     res.send({message: data});
+//   });
+// });
 
 app.get( [`${uri}/init`, `${uri}/reviews/:id` ], (req, res)=> {
   var id = null;
@@ -86,8 +79,6 @@ app.get( [`${uri}/init`, `${uri}/reviews/:id` ], (req, res)=> {
         if (!err) {
           res.status(200);
 
-          data.push(faker.image.abstract(), faker.image.abstract());
-
           dbCollection.unshift(data);
 
           dbCollection.unshift( db.accessHelpers.avgStatsCollection(dbCollection));
@@ -103,20 +94,7 @@ app.get( [`${uri}/init`, `${uri}/reviews/:id` ], (req, res)=> {
 app.use(`${uri}/:id`, (req,res,next)=> {
   var getPath =  path.join ( __dirname, '..', 'public', 'index.html') ;
   res.sendFile( getPath);
-
-
-
-
-
-
-
-
 });
-
-
-
-
-
 
 app.listen(3005, ()=>{
   console.log('listening on port 3005');

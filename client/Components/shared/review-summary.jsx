@@ -7,12 +7,13 @@ class ReviewSummary extends React.Component {
   }
 
   render() {
+    console.log(this.props)
 
     return (
       <div className={ProductReviewSummary["col-2-review-summary"]}>
         {
           ( this.props.labelOff ?''
-            : this.props.sizeRate > 0 || this.props.comfortRate > 0 || this.props.performRate > 0) ? <label> Rating Summary
+            : this.props.sizeRate >= 1 || this.props.comfortRate >= 0 || this.props.performRate >= 0) ? <label> Rating Summary
               : </label>
           : ''}
 

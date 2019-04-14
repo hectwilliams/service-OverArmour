@@ -25,7 +25,7 @@ var genTestimonials = function(count, pid) {
     obj.comfortRating = faker.random.number({min: 0, max: 7});
     obj.sizeRating = faker.random.number({min: 0, max: 7});
     obj.stars = faker.random.number({min: 0, max: 5});
-    obj.subject = faker.lorem.words({num: 4})
+    obj.subject = faker.lorem.words()
     obj.review = faker.lorem.sentences(4);
     obj.picture = faker.image.sports(1, 100);
     obj.likes = [faker.random.number(100), faker.random.number(100)];
@@ -47,13 +47,12 @@ var generateTable = function(callback) {
   var rand;
 
   for(var i = 0; i <= shoeCount; i++) {
-    rand = faker.random.number({min: 5, max: 7});
+    rand = faker.random.number({min: 2, max: 5});
     testimonial = genTestimonials(rand, i);
-    db.accessHelpers.writeCollection_Array(testimonial, i , (err, msg, db)=> {
+    db.accessHelpers.writeCollection_Array(testimonial, i , (err, msgb)=> {
       if (err) {
         console.log('error');
       }
-      db.close();
     });
   }
 };

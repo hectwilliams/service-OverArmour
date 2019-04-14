@@ -90,8 +90,8 @@
 
 .angry-bird {
   display: block;
-  background-color: black;
-  border-style: dotted;
+  background-color: rgb(108, 102, 102);
+  border-style: solid;
   width: 5%;
   height: fit-content;
   margin-left:93% ;
@@ -131,8 +131,8 @@
 
 .angry-bird-off {
   display: block;
-  background-color: black;
-  border-style: dotted;
+  background-color: rgba(255, 138, 138, 0.9);
+  border-style: solid;
   order: initial;
   width: 100%;
   height: fit-content;

@@ -1,18 +1,18 @@
 import React from 'react';
 import $ from 'jquery';
 import Testimonial from '../css-modules/css-testimonial/Testimonial.module.css'
+const origin = window.location.origin;
 
 var updateDislikeCount = function(user, data, id, callback) {
   $.ajax({
     method: 'PUT',
-    url: 'http://localhost:3005/' +'likes',
+    url: origin + '/' +'likes',
     type: 'json',
     data: {user: user, data: data, id: id},
     success: ()=> {
       callback(null);
     },
     error: ()=> {
-
       callback(true);
     }
   });
@@ -24,21 +24,18 @@ class Likes extends React.Component {
     this.state = {
       count: this.props.currCount,
       update: false
-
     };
   }
 
   clickHanlder(e) {
       var data =  parseInt(e.target.parentNode.parentNode.lastChild.innerText) + 1;
-    updateDislikeCount( this.props.user, data, this.props.id ,(err)=> {
+      this.setState({
+        count: data,
+        update: true
+      });
+    updateDislikeCount( this.props.user, data, this.props.id, (err)=> {
       if (!err) {
-        this.setState({
-          count: data,
-          update: true
-
-        });
-      } else {
-        console.log('errro')
+        /*error*/
       }
     });
   }
@@ -50,7 +47,7 @@ class Likes extends React.Component {
         <button onClick={this.clickHanlder.bind(this)} className ={ `${Testimonial['symbol']} ${Testimonial['likes']}`}>
           </button>
         </span>
-        <small className= 'counter' > { this.state.update ?this.state.count :this.props.release? 0: this.state.count}</small>
+        <small className= 'counter' > { this.state.update ?this.state.count : this.state.count}</small>
       </span>
     );
   }
