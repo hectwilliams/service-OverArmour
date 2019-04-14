@@ -17,7 +17,7 @@ class Stars extends React.Component {
   }
 
   render () {
-    console.log(this.props.subject , 'release')
+    console.log(this.props.release , 'release')
     return (
       <div className = {ProductReviewSummary['medium']}>
         {

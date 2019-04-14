@@ -57,7 +57,7 @@ class FilterOption extends React.Component {
 
           <div className={FilterOptionCss['filter-selection-option']}>
             <select className={FilterOptionCss['filter-selection-option-font']}>
-              <option>Hieght</option>
+              <option>Height</option>
               <option> {'<5'} </option>
               <option>5'1"-5'3"</option>
               <option>5'4"-5'6"</option>

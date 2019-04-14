@@ -30,10 +30,10 @@ class StarsEntry extends React.Component {
       <div >
         <Stars
           fetch = {this.clickHandle.bind(this)}
+          reset = {this.reset.bind(this)}
           stars = {this.props.stars}
           subject = {this.props.subject}
           cache = {this.state.stars}
-          reset = {this.reset.bind(this)}
           release = {this.props.release} //release from from :)
         />
       </div>

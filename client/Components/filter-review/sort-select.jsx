@@ -15,7 +15,8 @@ class SortSelection extends React.Component {
               <option >Most Relevant</option>
               <option >Newest</option>
             </select>
-            <button className={FilterOptionCss['sort-button']}>^ </button>
+            {/* <button className={FilterOptionCss['sort-button']}>^ </button> */}
+            <div></div>
           </div>
         </div>
       </div>

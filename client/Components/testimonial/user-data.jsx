@@ -33,15 +33,28 @@ class UserData extends React.Component {
               release = {this.props.release}
             />
           </div>
-          <div className={ `${Testimonial['testimonial-message']} ${Testimonial['testimonial-background']}`}    >  {this.props.info.review}</div>
+          <div className={ `${Testimonial['testimonial-message']} ${Testimonial['testimonial-background']}`}    >  <p>  {this.props.info.review}  </p>   </div>
 
           <div>
-            <span className={Testimonial['testimonial-pic']}>
-            <img className = {Testimonial['shoe-symbol']} src={ this.props.static[randRange()]} ></img>
-            </span>
-            <span className={Testimonial['testimonial-pic']}>
-            <img className = {Testimonial['shoe-symbol']} src={ this.props.static[randRange()]} ></img>
-            </span>
+            { Math.round(Math.random()) ==0 ?
+              <span className={Testimonial['testimonial-pic']}>
+              <img className = {Testimonial['shoe-symbol']} src={ this.props.static[randRange()]} ></img>
+              </span>
+
+              :
+              <div>
+                <span className={Testimonial['testimonial-pic']}>
+                <img className = {Testimonial['shoe-symbol']} src={ this.props.static[randRange()]} ></img>
+                </span>
+                <span className={Testimonial['testimonial-pic']}>
+                <img className = {Testimonial['shoe-symbol']} src={ this.props.static[randRange()]} ></img>
+                </span>
+              </div>
+
+
+            }
+
+
           </div>
 
           <div className = {Testimonial['testimonial-message']}>  Was this helpful?

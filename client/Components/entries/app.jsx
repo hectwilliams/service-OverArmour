@@ -8,24 +8,29 @@ import TestimonialEntry from './testimonial-entry';
 class App extends React.Component {
   constructor(props) {
     super(props);
+    // this.state({
 
+    // });
   }
 
   render() {
     return (
       <div className="app">
+
         <ProductReviewSummaryEntry
           avgStats = {this.props.avgStats}
         />
+
         <FilterReviewEntry
           addTestimonial = {this.props.addTestimonial.bind(this)}
         />
 
         <TestimonialEntry
-          dbData = {this.props.dbData}
           dbStatic = {this.props.dbStatic}
+          dbData = {this.props.dbData}
           release = {this.props.release}
         />
+
       </div>
     );
   }

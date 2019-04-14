@@ -14,27 +14,27 @@ var getDate = () => {
 };
 /* Prototypal Class  --> REVIEW*/
 var reviewer = function() {
-  this.gender = 'null';
-  this.user = 'null';
+  this.gender = '';
+  this.user = '';
   this.date = getDate();
-  this.sizePurchased = 'null';
-  this.performanceRating = 'null';
-  this.comfortRating = 'null';
+  this.sizePurchased = '';
+  this.performanceRating = '';
+  this.comfortRating = '';
   this.stars = 0;
   this.dislikes = 0;
   this.likes = 0;
   this.response = '';
   this.subject = '';
   this.review = '';
-  this.picture = 'null';
+  this.picture = '';
   this.responseDate = '';
-  this.sportsInterest = 'null';
-  this.athleteType = 'null';
-  this.height = 'null';
-  this.logoA = 'null';
-  this.logoB = 'null';
+  this.sportsInterest = '';
+  this.athleteType = '';
+  this.height = '';
+  this.logoA = '';
+  this.logoB = '';
   this.timestamp = Date.now();
-  this.pid = HectronPluck(window.location.href) =='init' ? 0 : HectronPluck(window.location.href) ;
+  this.pid = !Number.isInteger(window.location.pathname) ? 0 : window.location.pathname ;
 
 };
 reviewer.prototype.loadPicture = function() {
@@ -87,11 +87,11 @@ class Form extends React.Component {
     Array.prototype.forEach.call(children, (ele, index, array)=> {
       if (ele.checked) {
         messenger[ele.name] = ele.value;
-      } else if (ele.className === 'user-review-message-block') {
+      } else if (ele.name ===  'review') {
         messenger.review = ele.value;
-      } else if (ele.className === 'subject-box') {
+      } else if (ele.name === 'subject') {
         messenger.subject = ele.value;
-      } else if (ele.className === 'username') {
+      } else if (ele.name === 'user') {
         messenger.user = ele.value;
       }
     });
@@ -109,19 +109,19 @@ class Form extends React.Component {
     return (
       <form>
         <strong>Name(or alias)</strong><br></br>
-        <input className='username'type='text' name='user'></input>
+        <input  className = {FilterOptionCss['fonts']}type='text' name='user'></input>
         <br></br>
-
+        <br></br>
         <strong>Gender</strong><br></br>
         <span> Male</span> <input type='radio' name='gender' value='male' ></input>
         <span> Female</span> <input type='radio' name='gender' value='female' ></input>
         <br></br>
-
+        <br></br>
         <strong> Athletic Type</strong>     <br></br>
         <span> Casual</span>  <input type='radio' name='athleteType' value='Casual' ></input>
         <span> Professional</span>   <input type='radio' name='athleteType' value='Professional' ></input>
         <span> Avid</span><input type='radio' name='athleteType' value='Avid' ></input><br></br>
-
+        <br></br>
         <strong> Sport Interest</strong><br></br>
         <span> Basketball</span>  <input type='radio' name='sportsInterest' value='Basketball' ></input>
         <span> Field Hockey</span>  <input type='radio' name='sportsInterest' value='Field Hockey' ></input>
@@ -132,7 +132,7 @@ class Form extends React.Component {
         <span> Lacrosse</span>  <input type='radio' name='sportsInterest' value='Lacrosse' ></input>
         <span> Rugby</span>  <input type='radio' name='sportsInterest' value='Rugby' ></input>
         <span> Soccer</span>  <input type='radio' name='sportsInterest' value='Soccer'></input><br></br>
-
+        <br></br>
         <strong> Height</strong><br></br>
         <span> {'\<5\''} </span>  <input type='radio' name='height' value= {'\<5\''} ></input>
         <span> {'5\'4\" - 5\'6\"'} </span>  <input type='radio' name='height' value='5.4-5.6' ></input>
@@ -141,7 +141,7 @@ class Form extends React.Component {
         <span> {'5\'10\" - 6\"' } </span>  <input type='radio' name='height' value='5.10-6' ></input>
         <span> {'5\'1\" - 5\'3\"'} </span>  <input type='radio' name='height' value='5.1-5.3' ></input>
         <span> {'>6\'1\"'} </span>  <input type='radio' name='height' value='>6.1' ></input><br></br>
-
+        <br></br>
         <strong>Size Purchased</strong><br></br>
         <span>XS</span> <input type='radio' name='sizePurchased' value='XS'></input>
         <span>SM</span> <input type='radio' name='sizePurchased' value='SM'></input>
@@ -150,7 +150,7 @@ class Form extends React.Component {
         <span>XL</span> <input type='radio' name='sizePurchased' value='XL'></input>
         <span>XXL</span> <input type='radio' name='sizePurchased' value='XXL'></input>
         <span>3XL</span> <input type='radio' name='sizePurchased' value='3XL'></input> <br></br>
-
+        <br></br>
         <strong>Comfort Rating</strong><StarsEntry fetch = {this.fetchStarComfort.bind(this)}/>
         <br></br>
         <strong>Performance Rating</strong><StarsEntry fetch = {this.fetchStarPerf.bind(this)}/>
@@ -161,10 +161,12 @@ class Form extends React.Component {
         <br></br>
 
         <strong>Subject</strong><br></br>
-        <input className='subject-box' type='text' name='subject' min='0' max='100'></input>
+        <input className = {FilterOptionCss['fonts']} type='text' name='subject' min='0' max='100'></input>
         <br></br>
 
-        <textarea onChange={this.changedTextHandler.bind(this)} name='review' className= {FilterOptionCss['user-review-message-block']} value = {this.state.text}> </textarea> <br></br>
+        <textarea onChange={this.changedTextHandler.bind(this)} name='review'
+        className=    {`${FilterOptionCss['user-review-message-block']} ${FilterOptionCss['fontSizeMsg']}`}
+        value = {this.state.text}> </textarea> <br></br>
 
         <input onClick={this.submitHandler.bind(this)} className= {FilterOptionCss['submit-review-button']} type={'submit'} value={'Post'}></input>
         <input onClick={this.props.releaseModal} className = {FilterOptionCss['release-review-button']} type={'submit'} value={'Cancel'}></input>
@@ -176,13 +178,4 @@ class Form extends React.Component {
 
 
 export default Form;
-
-var HectronPluck = (url) => {
-  var idx = url.lastIndexOf('/')+1;
-  var tail =  url.slice(idx) ;
-  if ( tail > 0 && tail <= 100) {
-    return tail ;
-  }
-  return 'init';
-};
 
