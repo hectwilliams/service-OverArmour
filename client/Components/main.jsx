@@ -5,7 +5,6 @@ import App from '../Components/entries/app';
 const origin = window.location.origin;
 
 var addReviewToDatabase = function(data, callback) {
-  console.log(data)
   $ .ajax({
     method: 'PUT',
     url: origin + '/' + 'add-review',

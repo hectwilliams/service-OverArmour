@@ -7,8 +7,6 @@ class ReviewSummary extends React.Component {
   }
 
   render() {
-    console.log(this.props)
-
     return (
       <div className={ProductReviewSummary["col-2-review-summary"]}>
         {

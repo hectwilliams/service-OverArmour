@@ -78,12 +78,14 @@ app.get( [`${uri}/init`, `${uri}/reviews/:id` ], (req, res)=> {
       amazon.accessHelpers.fetchStatic((err, data) => {
         if (!err) {
           res.status(200);
-
           dbCollection.unshift(data);
-
-          dbCollection.unshift( db.accessHelpers.avgStatsCollection(dbCollection));
-          res.send(dbCollection);
+           db.accessHelpers.avgStatsCollection(dbCollection, (data)=>{
+            (dbCollection.unshift(data));
+            res.send(dbCollection);
+          });
         } else {
+          res.status(404);
+
           console.log('err initializing page');
         }
       });

@@ -27,5 +27,5 @@ dist/
 
 hidden_misc
 public/bundle.js
-/server/config.js
+config.js
 # .circleci/config.yml
