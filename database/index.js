@@ -1,5 +1,5 @@
 const MongoClient = require('mongodb').MongoClient;
-const personal = require('../hidden_misc/config');
+const personal = require('../config');
 
 // const uri = 'mongodb://localhost:27017';
 // mongodb+srv://hectwilliams:<password>@cluster0-e5veh.mongodb.net/test?retryWrites=true
@@ -73,7 +73,7 @@ var sortCollection = (list)=> {
   });
 };
 
-var avgStatsCollection = (list) => {
+var avgStatsCollection = (list, callback) => {
   var avg = {
     size: 0,
     performance: 0,
@@ -92,31 +92,65 @@ var avgStatsCollection = (list) => {
   var maxFound  = [0, 0]
 
   for (var obj of list ) {
-    avg.size += !parseFloat (obj.sizePurchased) ? 0 : parseFloat(obj.sizePurchased);
-    avg.performance += !parseFloat (obj.performanceRating) ? 0 : parseFloat( obj.performanceRating);
-    avg.comfort += !parseFloat (obj.comfortRating) ? 0 : parseFloat (obj.comfortRating);
     if (!((obj.stars) === NaN) && (obj.stars)) {
       avg.histoStars[obj.stars] += +( parseInt(obj.stars) !== 0);
       outcomes++;
     }
   }
-
-  avg.size = avg.size / list.length;
-  avg.performance = avg.performance / list.length;;
-  avg.comfort = avg.comfort /  list.length;;
-  console.log(avg)
   for (var key in avg.histoStars ) {
     avg.histoStars[key] = Math.round( (avg.histoStars[key]/outcomes)*100 ) ;
-
     if (avg.histoStars[key]  >  maxFound[1]) {
       maxFound = [key, avg.histoStars[key]];
     }
-
     avg.stars = maxFound[0]; // update with largest average
   }
-  return avg;
+
+  avgHelper((err, data)=>{
+
+    if(!err) {
+      avg.performance = Math.round(data.Performance);
+      avg.size = Math.round(data.Size);
+      avg.stars = Math.round(data.Stars);
+      avg.comfort = Math.round(data.Comfort);
+      callback(avg);
+    }else {
+      callback(avg);
+    }
+  } );
+
+
+  // return avg;
 };
 
+
+var avgHelper = (callback) => {
+  const param = [
+    {
+      $group:
+        { _id: null,
+          Size: { $avg: "$sizeRating" },
+          Performance: { $avg: "$performanceRating" },
+          Comfort: { $avg: "$comfortRating" },
+          Stars: { $avg: "$stars" }
+
+        }
+    }
+  ]
+
+  client.connect(function(err, db) {
+    const collection = db.db(dbName).collection(tableName);
+    collection.aggregate(param, (err1, promise)=>{
+
+      promise.toArray( (err2, data)=>{
+        if (err1||err2) {
+          callback(true, {Size:0, Performance: 0, Comfort: 0});
+        } else {
+          callback(null,data[0]);
+        }
+      });
+    })
+  })
+}
 var updateCollection = (query, data, callback)=> {
   var set = {
     $set: data
