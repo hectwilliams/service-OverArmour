@@ -12,7 +12,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.static('./public'));
 app.use( cors() );
-
+const port = process.env.PORT || 3005;
 
 
 app.put(`${uri}/add-review`, (req, res)=> {
@@ -48,7 +48,7 @@ app.put(`${uri}/dislikes`, (req, res)=> {
     res.end();
   });
 });
-
+//
 // db.accessHelpers.clearDatabase(); // --> DEBUG ONLY :);
 
 // app.get( `${uri}/aws`, (req, res )=> {
@@ -60,7 +60,7 @@ app.put(`${uri}/dislikes`, (req, res)=> {
 app.get( [`${uri}/init`, `${uri}/reviews/:id` ], (req, res)=> {
   var id = null;
   var idx = req.path.lastIndexOf('/');
-
+  console.log(req.path,'PPPATH')
   if (req.path.indexOf('review') !== -1) {
     id = req.path.slice(idx + 1)
   } else {
@@ -98,7 +98,7 @@ app.use(`${uri}/:id`, (req,res,next)=> {
   res.sendFile( getPath);
 });
 
-app.listen(3005, ()=>{
+app.listen(port, ()=>{
   console.log('listening on port 3005');
 });
 

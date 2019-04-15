@@ -18,7 +18,7 @@
     "test": "jest --watchAll --coverage",
     "server-dev": "nodemon --no-warnings ./server/server.js",
     "react-dev": "webpack -d --watch",
-    "seed": "node --no-warnings ./database/seedData.js"
+    "seed": "node ./database/seedData.js"
   },
   "dependencies": {
     "@babel/core": "7.4.0",
