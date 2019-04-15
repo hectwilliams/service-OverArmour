@@ -1,6 +1,6 @@
 var faker = require('faker');
 var db = require('../../database/index');
-faker.seed(100);
+// faker.seed(100);
 
 var genPID = function() { //quiet for now
   return `pid_${faker.random.number({min: 1, max: 1000})}`;
@@ -12,13 +12,15 @@ var timeStamp = function() {
 
 var genTestimonials = function(count, pid) {
   var storage = [];
+  var buffer = pid + '';
   for (var i = 0; i < count; i++) {
+    buffer+= i;
     var obj = {};
     obj.height = `${faker.random.number({min: 5, max: 7})} '${faker.random.number({min: 0, max: 11})}"`;
     obj.athleteType = faker.random.arrayElement(['Avid', 'Casual', 'Professional']);
     obj.sportsInterest = faker.random.arrayElement(['Basketball', 'Soccer', 'Basball', 'Softball', 'Field Hockey', 'Football', 'Golf', 'Lacrosse', 'Rugby', 'Volleyball']);
-    obj.gender = faker.random.arrayElement(['male', 'female']);
-    obj.user = faker.name.firstName({male: 22});
+    obj.gender = faker.random.arrayElement(['male', 'female']) ;
+    obj.user = faker.name.firstName+ buffer
     obj.date = faker.date.recent();
     obj.sizePurchased = faker.random.arrayElement(['XS', 'SM', 'MD', 'LG', 'XL', 'XXL', '3XL']);
     obj.performanceRating = faker.random.number({min: 0, max: 7});
@@ -42,14 +44,17 @@ var genTestimonials = function(count, pid) {
 };
 
 var generateTable = function(callback) {
-  const shoeCount = 12;  //max number of review pages
+  const shoeCount = 1000;  //max number of review pages
   var testimonial;
   var rand;
   var array = [];
 
   for(var i = 0; i <= shoeCount; i++) {
+    console.log(i)
+    // globalCount.tick = globalCount.tick + 1;
+
     rand = faker.random.number({min: 4, max: 10});
-    testimonial = genTestimonials(rand, i);
+    testimonial = genTestimonials(5, i);
     array= array.concat(testimonial)
   }
     db.accessHelpers.writeCollection_Array(array, i)
@@ -64,7 +69,7 @@ var run = function() {
   }
   console.log('Starting to seed');
   setTimeout(generateTable, 200);
-  setTimeout( close ,5000);
+  setTimeout( close ,7000);
 
   console.log('databased seed processing!');
 };
