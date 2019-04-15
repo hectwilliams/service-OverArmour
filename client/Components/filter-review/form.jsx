@@ -34,8 +34,7 @@ var reviewer = function() {
   this.logoA = '';
   this.logoB = '';
   this.timestamp = Date.now();
-  this.pid = !Number.isInteger(window.location.pathname) ? 0 : window.location.pathname ;
-
+  this.pid = HectronPluck(window.location.href) =='init' ? 0 : HectronPluck(window.location.href) ;
 };
 reviewer.prototype.loadPicture = function() {
 };
@@ -178,4 +177,13 @@ class Form extends React.Component {
 
 
 export default Form;
+
+var HectronPluck = (url) => {
+  var idx = url.lastIndexOf('/')+1;
+  var tail =  url.slice(idx) ;
+  if ( tail > 0 && tail <= 100) {
+    return tail ;
+  }
+  return 'init';
+};
 

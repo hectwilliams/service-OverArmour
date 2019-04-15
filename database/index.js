@@ -1,10 +1,10 @@
 const MongoClient = require('mongodb').MongoClient;
 const personal = require('../config');
 
-// const uri = 'mongodb://localhost:27017';
+const uri = 'mongodb://localhost:27017';
 // mongodb+srv://hectwilliams:<password>@cluster0-e5veh.mongodb.net/test?retryWrites=true
+// var uri = `mongodb+srv://hectwilliams:${personal.passwordMongodb}@cluster0-e5veh.mongodb.net/test?retryWrites=true`
 
-const uri = `mongodb+srv://hectwilliams:${personal.passwordMongodb}@cluster0-e5veh.mongodb.net/test?retryWrites=true`;
 const dbName = 'under-armour';
 var tableName = 'reviews';
 
@@ -31,6 +31,7 @@ var clearDatabase = function(callback) {
 };
 
 var readCollection = (id, callback)=> {
+  console.log(id)
   var query = [ {pid: {$eq: parseInt(id)}}, {pid: {$eq: String(id)}} ];
   client.connect((err, db)=> {
     const collection = db.db(dbName).collection(tableName);

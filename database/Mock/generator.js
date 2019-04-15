@@ -42,33 +42,31 @@ var genTestimonials = function(count, pid) {
 };
 
 var generateTable = function(callback) {
-  const shoeCount = 100;  //max number of review pages
+  const shoeCount = 12;  //max number of review pages
   var testimonial;
   var rand;
+  var array = [];
 
   for(var i = 0; i <= shoeCount; i++) {
-    rand = faker.random.number({min: 2, max: 5});
+    rand = faker.random.number({min: 4, max: 10});
     testimonial = genTestimonials(rand, i);
-    db.accessHelpers.writeCollection_Array(testimonial, i , (err, msgb)=> {
-      if (err) {
-        console.log('error');
-      }
-    });
+    array= array.concat(testimonial)
   }
+    db.accessHelpers.writeCollection_Array(array, i)
 };
 
 var run = function() {
   var close = () => {
-    console.log('databased seeded!');
+    console.log(' seed complete!');
     // process.stdout.write('\x1Bc');
-    console.log('Sorry for the logs, I will patch soon :)');
     process.exit();
 
   }
   console.log('Starting to seed');
   setTimeout(generateTable, 200);
-  setTimeout( close , 5000);
-  console.log('databased seeded!');
+  setTimeout( close ,5000);
+
+  console.log('databased seed processing!');
 };
 
 exports.accessHelpers = {

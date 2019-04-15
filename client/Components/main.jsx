@@ -33,19 +33,19 @@ class ShoeReview extends React.Component{
       release: false
     }
   }
-
   componentDidMount () {
-    var value = 'init';
-    if (Number.isInteger(window.location.pathname)){
-      this.request(  'reviews' + '/' + window.location.pathname )
+    var endpoint = HectronPluck(window.location.href);
+    if(endpoint == 'init') {
+      this.requestOrigin(endpoint);
+    } else if (!isNaN(endpoint)) {
+      this.requestNonOrigin(endpoint);
     }
-    this.reqService(value);
   }
 
-  reqService(endpoint) {
+  requestOrigin(endpoint) {
     $.ajax({
       method: 'get',
-      url: origin + '/' +endpoint ,
+      url: origin +  '/'  +endpoint ,
       success: (serviceData)=> {
         console.log(serviceData);
         this.setState({
@@ -55,10 +55,36 @@ class ShoeReview extends React.Component{
           ready: true,
           id: endpoint,
           release: true
+
+        });
+      },
+      error: ()=> {
+      }
+    });
+  }
+
+  requestNonOrigin(endpoint) {
+    $.ajax({
+      method: 'get',
+      url:   origin +  '/'  + 'reviews' + '/' + endpoint,
+      success: (serviceData)=> {
+        console.log(serviceData);
+        this.setState({
+          dbData: serviceData.slice(2),
+          dbavgStats: serviceData[0],
+          dbStatic: serviceData[1],
+          ready: true,
+          id: endpoint,
+          release: true
+
         });
       },
     });
   }
+
+
+
+
 
   addTestimonial (obj) {
     this.setState({
@@ -89,3 +115,12 @@ class ShoeReview extends React.Component{
   }
 }
 export default ShoeReview;
+
+var HectronPluck = (url) => {
+  var idx = url.lastIndexOf('/')+1;
+  var tail =  url.slice(idx) ;
+  if ( tail > 0 && tail <= 100) {
+    return tail ;
+  }
+  return 'init';
+};
