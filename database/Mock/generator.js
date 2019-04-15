@@ -20,7 +20,7 @@ var genTestimonials = function(count, pid) {
     obj.athleteType = faker.random.arrayElement(['Avid', 'Casual', 'Professional']);
     obj.sportsInterest = faker.random.arrayElement(['Basketball', 'Soccer', 'Basball', 'Softball', 'Field Hockey', 'Football', 'Golf', 'Lacrosse', 'Rugby', 'Volleyball']);
     obj.gender = faker.random.arrayElement(['male', 'female']) ;
-    obj.user = faker.name.firstName+ buffer
+    obj.user = faker.name.firstName()+ buffer;
     obj.date = faker.date.recent();
     obj.sizePurchased = faker.random.arrayElement(['XS', 'SM', 'MD', 'LG', 'XL', 'XXL', '3XL']);
     obj.performanceRating = faker.random.number({min: 0, max: 7});
@@ -51,10 +51,9 @@ var generateTable = function(callback) {
 
   for(var i = 0; i <= shoeCount; i++) {
     console.log(i)
-    // globalCount.tick = globalCount.tick + 1;
 
-    rand = faker.random.number({min: 4, max: 10});
-    testimonial = genTestimonials(5, i);
+    rand = faker.random.number({min: 4, max: 6});
+    testimonial = genTestimonials(rand, i);
     array= array.concat(testimonial)
   }
     db.accessHelpers.writeCollection_Array(array, i)
@@ -69,7 +68,7 @@ var run = function() {
   }
   console.log('Starting to seed');
   setTimeout(generateTable, 200);
-  setTimeout( close ,7000);
+  setTimeout( close ,14000);
 
   console.log('databased seed processing!');
 };

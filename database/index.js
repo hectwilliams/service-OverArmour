@@ -1,20 +1,17 @@
 const MongoClient = require('mongodb').MongoClient;
-const personal = require('../config');
+
+// const personal = require('../config');
+// var uri = `mongodb+srv://hectwilliams:${personal.passwordMongodb}@cluster0-e5veh.mongodb.net/test?retryWrites=true`
 
 const uri = 'mongodb://localhost:27017';
-// mongodb+srv://hectwilliams:<password>@cluster0-e5veh.mongodb.net/test?retryWrites=true
-// var uri = `mongodb+srv://hectwilliams:${personal.passwordMongodb}@cluster0-e5veh.mongodb.net/test?retryWrites=true`
 
 const dbName = 'under-armour';
 var tableName = 'reviews';
 
-// var options = {
-//   useNewUrlParser: true,
-// };
+
 
 const unique = {
   user: 1,
-  pid: 1
 };
 
 const client = new MongoClient(uri, { useNewUrlParser: true });
